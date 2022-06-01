@@ -1,0 +1,493 @@
+<!--<div class="allApp" style="background-color: #f5f5f5;">-->
+<!--  <nav class="navbar navbar-expand-lg navbar-dark bg-dark" style="height: 15vh; position: fixed;-->
+<!--  left: 0px;-->
+<!--  top: 0px; bottom: 110px; z-index: 15; width: 100vw">-->
+<!--    <a class="navbar-brand" style="cursor: default; color:white; padding: 20px; font-size: 40px; text-transform: uppercase; letter-spacing: 2px; font-weight: 600">Football Academy</a>-->
+<!--    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor02"-->
+<!--            aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">-->
+<!--      <span class="navbar-toggler-icon"></span>-->
+<!--    </button>-->
+<!--    <div class="collapse navbar-collapse" id="navbarColor02">-->
+<!--      <ul class="navbar-nav mr-auto">-->
+<!--        <li class="btn btn-success"><a style="margin-left: 20px; font-size: 25px" class="nav-link" (click)="onOpenModal(null, 'addParent')">Add Parent-->
+<!--          <span class="sr-only">(current)</span></a>-->
+<!--        </li>-->
+<!--        <li class="nav-item active">-->
+<!--          &lt;!&ndash;          <a style="margin-left: 20px; font-size: 25px" class="nav-link" (click)="onOpenModalOrganization(null, 'add')">Add Organization&ndash;&gt;-->
+<!--          <a style="margin-left: 20px; font-size: 25px" class="nav-link">Admin Member-->
+<!--            <span class="sr-only">(current)</span></a>-->
+<!--        </li>-->
+<!--        <li class="nav-item active">-->
+<!--          &lt;!&ndash;          <a style="margin-left: 20px; font-size: 25px" class="nav-link" (click)="onOpenModalOrganization(null, 'reservation')">Reservations&ndash;&gt;-->
+<!--          <a style="margin-left: 20px; font-size: 25px" class="nav-link" >Coachs-->
+<!--            <span class="sr-only">(current)</span></a>-->
+<!--        </li>-->
+<!--      </ul>-->
+<!--      <form class="form-inline my-2 my-lg-0">-->
+<!--        &lt;!&ndash;        <input type="search" (ngModelChange)="searchOrganizations(key.value)" #key="ngModel" ngModel&ndash;&gt;-->
+<!--        <input type="search"-->
+<!--               name="key" id="searchName" class="form-control mr-sm-2" placeholder="Search organizations..." required>-->
+<!--      </form>-->
+<!--    </div>-->
+<!--  </nav>-->
+<!--  <div class="content" style=" margin-top: 110px; height: 80vh; overflow-scrolling: auto;  background-color: #f5f5f5;"  id="main-container">-->
+
+<!--    <div class="container bootstrap snippets bootdey">-->
+<!--      <div class="row">-->
+<!--        <div class="col-lg-12">-->
+<!--          <div class="main-box no-header clearfix">-->
+<!--            <div class="main-box-body clearfix">-->
+<!--              <div class="table-responsive" >-->
+<!--                <table class="table user-list">-->
+<!--                  <thead>-->
+<!--                  <tr>-->
+<!--                    <th><span>Name</span></th>-->
+<!--                    <th><span>Joined</span></th>-->
+<!--                    <th class="text-center"><span>Function</span></th>-->
+<!--                    <th><span>Email</span></th>-->
+<!--                    <th>&nbsp;</th>-->
+<!--                  </tr>-->
+<!--                  </thead>-->
+
+<!--                  <tbody *ngFor="let parent of parents">-->
+
+<!--                  <tr>-->
+<!--                    <td>-->
+<!--                      <img src="https://bootdey.com/img/Content/user_1.jpg" alt="">-->
+<!--                      <a href="#" class="user-link">Name: {{parent?.name}} {{parent?.surname}}</a>-->
+<!--                      <span class="user-subhead">Role: {{parent?.role}}</span>-->
+<!--                    </td>-->
+<!--                    <td>2013/08/12</td>-->
+<!--                    <td class="text-center">-->
+<!--                      <span class="label label-default">pending</span>-->
+<!--                    </td>-->
+<!--                    <td>-->
+<!--                      <a href="{{parent?.login}}">Email: {{parent?.login}}</a>-->
+<!--                    </td>-->
+<!--                    <td style="width: 20%;">-->
+<!--                      <a type="button" class="table-link text-warning" (click)="onOpenModal(parent, 'infoParent')">-->
+<!--                                            <span class="fa-stack">-->
+<!--                                                <i class="fa fa-square fa-stack-2x"></i>-->
+<!--                                                <i class="fa fa-info fa-stack-1x fa-inverse"></i>-->
+<!--                                            </span>-->
+<!--                      </a>-->
+<!--                      <a type="button" class="table-link text-info" (click)="onOpenModal(parent, 'updateParent')">-->
+<!--                                            <span class="fa-stack">-->
+<!--                                                <i class="fa fa-square fa-stack-2x"></i>-->
+<!--                                                <i class="fa fa-pencil fa-stack-1x fa-inverse"></i>-->
+<!--                                            </span>-->
+<!--                      </a>-->
+<!--                      <a type="button" class="table-link text-info"  (click)="onOpenModal(parent, 'addPlayerByGuardian')">-->
+<!--                                            <span class="fa-stack">-->
+<!--                                                <i class="fa fa-square fa-stack-2x" ></i>-->
+<!--                                                <i class="fa fa-plus fa-stack-1x fa-inverse" ></i>-->
+<!--                                            </span>-->
+<!--                      </a>-->
+<!--                      <a type="button" class="table-link danger" (click)="onOpenModal(parent, 'deleteParent')">-->
+<!--                                            <span class="fa-stack">-->
+<!--                                                <i class="fa fa-square fa-stack-2x"></i>-->
+<!--                                                <i class="fa fa-trash-o fa-stack-1x fa-inverse"></i>-->
+<!--                                            </span>-->
+<!--                      </a>-->
+<!--                    </td>-->
+<!--                  </tr>-->
+
+
+<!--                  </tbody>-->
+<!--                </table>-->
+<!--              </div>-->
+<!--            </div>-->
+<!--          </div>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--    </div>-->
+
+
+
+
+<!--    &lt;!&ndash;  INFO GUARDIAN&ndash;&gt;-->
+
+
+<!--    <div class="modal fade" id="infoParent" tabindex="-1" role="dialog" aria-labelledby="infoParentModalLabel" aria-hidden="true">-->
+<!--      <div class="modal-dialog " style="max-width: 1100px;" role="document">-->
+<!--        <div class="modal-content">-->
+<!--          <div class="modal-header">-->
+<!--            <div class="container bootstrap snippets bootdey">-->
+<!--              <div class="row">-->
+<!--                <div class="col-lg-12">-->
+<!--                  <div class="main-box no-header clearfix">-->
+<!--                    <div class="main-box-body clearfix">-->
+<!--                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">-->
+<!--                        <span aria-hidden="true">&times;</span>-->
+<!--                      </button>-->
+<!--                      <form class="form-inline my-2 my-lg-0" >-->
+<!--                        <h2>Info about {{setInfoParent?.name}} {{setInfoParent?.surname}}</h2>-->
+<!--                        <button style="margin-left: 250px; margin-bottom: 15px; text-transform: uppercase" (click)="printReportParentInfoPdf()" type="button" class="btn btn-primary">Download .pdf</button>-->
+<!--                      </form>-->
+<!--                      <div class="table-responsive">-->
+
+<!--                        <div class="container bootstrap snippets bootdey">-->
+<!--                          <div class="panel-body inf-content">-->
+<!--                            <div class="row">-->
+<!--                              <div class="col-md-4">-->
+<!--                                <img alt="" style="width:600px;" title="" class="img-circle img-thumbnail isTooltip" src="{{setInfoParent.imageUrl}}" data-original-title="Usuario">-->
+<!--                                <ul title="Ratings" class="list-inline ratings text-center">-->
+<!--                                  <li><a href="#"><span class="glyphicon glyphicon-star"></span></a></li>-->
+<!--                                  <li><a href="#"><span class="glyphicon glyphicon-star"></span></a></li>-->
+<!--                                  <li><a href="#"><span class="glyphicon glyphicon-star"></span></a></li>-->
+<!--                                  <li><a href="#"><span class="glyphicon glyphicon-star"></span></a></li>-->
+<!--                                  <li><a href="#"><span class="glyphicon glyphicon-star"></span></a></li>-->
+<!--                                </ul>-->
+<!--                              </div>-->
+<!--                              <div class="col-md-6">-->
+<!--                                <strong>Information</strong><br>-->
+<!--                                <div class="table-responsive">-->
+<!--                                  <table class="table table-user-information">-->
+<!--                                    <tbody>-->
+<!--                                    <tr>-->
+<!--                                      <td>-->
+<!--                                        <strong>-->
+<!--                                          <span class="glyphicon glyphicon-asterisk text-primary"></span>-->
+<!--                                          Identificacion-->
+<!--                                        </strong>-->
+<!--                                      </td>-->
+<!--                                      <td class="text-primary">-->
+<!--                                        {{setInfoParent?.id}}-->
+<!--                                      </td>-->
+<!--                                    </tr>-->
+<!--                                    <tr>-->
+<!--                                      <td>-->
+<!--                                        <strong>-->
+<!--                                          <span class="glyphicon glyphicon-user  text-primary"></span>-->
+<!--                                          Name-->
+<!--                                        </strong>-->
+<!--                                      </td>-->
+<!--                                      <td class="text-primary">-->
+<!--                                        {{setInfoParent?.name}}-->
+<!--                                      </td>-->
+<!--                                    </tr>-->
+<!--                                    <tr>-->
+<!--                                      <td>-->
+<!--                                        <strong>-->
+<!--                                          <span class="glyphicon glyphicon-cloud text-primary"></span>-->
+<!--                                          Lastname-->
+<!--                                        </strong>-->
+<!--                                      </td>-->
+<!--                                      <td class="text-primary">-->
+<!--                                        {{setInfoParent?.surname}}-->
+<!--                                      </td>-->
+<!--                                    </tr>-->
+
+<!--                                    <tr>-->
+<!--                                      <td>-->
+<!--                                        <strong>-->
+<!--                                          <span class="glyphicon glyphicon-bookmark text-primary"></span>-->
+<!--                                          Username-->
+<!--                                        </strong>-->
+<!--                                      </td>-->
+<!--                                      <td class="text-primary">-->
+<!--                                        {{setInfoParent?.login}}-->
+<!--                                      </td>-->
+<!--                                    </tr>-->
+
+
+<!--                                    <tr>-->
+<!--                                      <td>-->
+<!--                                        <strong>-->
+<!--                                          <span class="glyphicon glyphicon-eye-open text-primary"></span>-->
+<!--                                          Role-->
+<!--                                        </strong>-->
+<!--                                      </td>-->
+<!--                                      <td class="text-primary">-->
+<!--                                        {{setInfoParent?.role}}-->
+<!--                                      </td>-->
+<!--                                    </tr>-->
+<!--                                    <tr>-->
+<!--                                      <td>-->
+<!--                                        <strong>-->
+<!--                                          <span class="glyphicon glyphicon-envelope text-primary"></span>-->
+<!--                                          Email-->
+<!--                                        </strong>-->
+<!--                                      </td>-->
+<!--                                      <td class="text-primary">-->
+<!--                                        {{setInfoParent?.login}}-->
+<!--                                      </td>-->
+<!--                                    </tr>-->
+<!--                                    <tr>-->
+<!--                                      <td>-->
+<!--                                        <strong>-->
+<!--                                          <span class="glyphicon glyphicon-calendar text-primary"></span>-->
+<!--                                          created-->
+<!--                                        </strong>-->
+<!--                                      </td>-->
+<!--                                      <td class="text-primary">-->
+<!--                                        {{setInfoParent?.joined}}-->
+<!--                                      </td>-->
+<!--                                    </tr>-->
+<!--                                    <tr>-->
+<!--                                      <td>-->
+<!--                                        <strong>-->
+<!--                                          <span class="glyphicon glyphicon-calendar text-primary"></span>-->
+<!--                                          Modified-->
+<!--                                        </strong>-->
+<!--                                      </td>-->
+<!--                                      <td class="text-primary">-->
+<!--                                        {{setInfoParent?.joined}}-->
+<!--                                      </td>-->
+<!--                                    </tr>-->
+<!--                                    </tbody>-->
+<!--                                  </table>-->
+<!--                                </div>-->
+<!--                              </div>-->
+<!--                            </div>-->
+<!--                          </div>-->
+<!--                        </div>-->
+
+<!--                      </div>-->
+<!--                    </div>-->
+<!--                  </div>-->
+<!--                </div>-->
+<!--              </div>-->
+<!--            </div>-->
+<!--          </div>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--    </div>-->
+
+<!--    &lt;!&ndash;  UPDATE GUARDIANS&ndash;&gt;-->
+
+<!--    <div class="modal fade" id="updateParentModal" tabindex="-1" role="dialog"-->
+<!--         aria-labelledby="updateGuardianModalLabel" aria-hidden="true">-->
+<!--      <div class="modal-dialog" role="document">-->
+<!--        <div class="modal-content">-->
+<!--          <div class="modal-header">-->
+<!--            <h5 class="modal-title" id="updateParentModalLabel">Edit-->
+<!--              Parent: {{editParent?.login}}</h5>-->
+<!--            <button type="button" class="close" data-dismiss="modal" aria-label="Close">-->
+<!--              <span aria-hidden="true">&times;</span>-->
+<!--            </button>-->
+<!--          </div>-->
+<!--          <div class="modal-body">-->
+<!--            <form #editFormParent="ngForm">-->
+<!--              <input type="hidden" ngModel="{{editParent?.id}}" name="id" class="form-control"-->
+<!--                     id="reservationIdReservationEdit" placeholder="">-->
+<!--              <input type="hidden" ngModel="{{editParent?.role}}" name="role"-->
+<!--                     class="form-control" id="reservationIdentifierReservationEdit" placeholder="">-->
+
+<!--              <div class="form-group">-->
+<!--                <label for="guardianNameEdit">Name:</label>-->
+<!--                <input type="text" ngModel="{{editParent?.name}}" name="name"-->
+<!--                       class="form-control" id="guardianNameEdit" placeholder="">-->
+<!--              </div>-->
+
+<!--              <div class="form-group">-->
+<!--                <label for="guardianSurnameEdit">Surname:</label>-->
+<!--                <input type="text" ngModel="{{editParent?.surname}}" name="surname"-->
+<!--                       class="form-control" id="guardianSurnameEdit" placeholder="">-->
+<!--              </div>-->
+
+<!--              <div class="form-group">-->
+<!--                <label for="guardianLoginEdit">Login(email):</label>-->
+<!--                <input type="email" ngModel="{{editParent?.login}}" name="login"-->
+<!--                       class="form-control" id="guardianLoginEdit" placeholder="">-->
+<!--              </div>-->
+
+<!--              <div class="form-group">-->
+<!--                <label for="guardianPasswordEdit">Password:</label>-->
+<!--                <input type="password" ngModel="{{editParent?.password}}" name="password"-->
+<!--                       class="form-control" id="guardianPasswordEdit" placeholder="">-->
+<!--              </div>-->
+
+<!--              <div class="form-group">-->
+<!--                <label for="guardianSurnameEdit">Surname:</label>-->
+<!--                <input type="text" ngModel="{{editParent?.surname}}" name="imageUrl"-->
+<!--                       class="form-control" id="imageUrlParentEdit" placeholder="">-->
+<!--              </div>-->
+
+<!--              <div class="form-group">-->
+<!--                <label for="guardianLoginEdit">Login(email):</label>-->
+<!--                <input type="email" ngModel="{{editParent?.login}}" name="joined"-->
+<!--                       class="form-control" id="joinedParentEdit" placeholder="">-->
+<!--              </div>-->
+
+<!--              <div class="form-group">-->
+<!--                <input type="hidden" ngModel="NO" name="status"-->
+<!--                       class="form-control" id="parentStatusEdit" placeholder="">-->
+<!--              </div>-->
+
+
+
+<!--              <div class="modal-footer">-->
+<!--                <button type="button" data-dismiss="modal" class="btn btn-secondary">Close</button>-->
+<!--                <button (click)="updateParent(editFormParent.value)" data-dismiss="modal"-->
+<!--                        class="btn btn-primary">Save changes-->
+<!--                </button>-->
+<!--              </div>-->
+<!--            </form>-->
+<!--          </div>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--    </div>-->
+
+
+<!--    &lt;!&ndash;  DELETE Guardians&ndash;&gt;-->
+
+
+<!--    <div class="modal fade" id="deleteParentModal" tabindex="-1" role="dialog"-->
+<!--         aria-labelledby="deleteParentModalLabel" aria-hidden="true">-->
+<!--      <div class="modal-dialog" role="document">-->
+<!--        <div class="modal-content">-->
+<!--          <div class="modal-header">-->
+<!--            <h5 class="modal-title" id="deleteParentModalLabel">Delete Parent</h5>-->
+<!--            <button type="button" class="close" data-dismiss="modal" aria-label="Close">-->
+<!--              <span aria-hidden="true">&times;</span>-->
+<!--            </button>-->
+<!--          </div>-->
+<!--          <div class="modal-body">-->
+<!--            <p>Do you want to delete guardian: {{toDeleteParent?.login}} ?</p>-->
+<!--            <div class="modal-footer">-->
+<!--              <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>-->
+<!--              <button (click)="deleteParent(toDeleteParent?.id)" class="btn btn-danger"-->
+<!--                      data-dismiss="modal">Yes-->
+<!--              </button>-->
+<!--            </div>-->
+<!--          </div>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--    </div>-->
+
+<!--    &lt;!&ndash;  ADD GUARDIAN&ndash;&gt;-->
+
+
+<!--    <div id="addParentModal" class="modal fade">-->
+<!--      <div class="modal-dialog">-->
+<!--        <div class="modal-content">-->
+<!--          <form #parentForm="ngForm" (ngSubmit)="addParent(parentForm)">-->
+<!--            <div class="modal-header">-->
+<!--              <h4 class="modal-title">Add Parent</h4>-->
+<!--              <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>-->
+<!--            </div>-->
+<!--            <div class="modal-body">-->
+<!--              <div class="form-group">-->
+<!--                <label for="parentName">Name :</label>-->
+<!--                <input type="text" ngModel maxlength="20" minlength="2" name="name" class="form-control" id="parentName"-->
+<!--                       placeholder="Name"  required>-->
+<!--              </div>-->
+<!--              <div class="form-group">-->
+<!--                <label for="parentSurname">Surname :</label>-->
+<!--                <input type="text" ngModel maxlength="20" minlength="2" name="surname" class="form-control" id="parentSurname"-->
+<!--                       placeholder="Surname"  required>-->
+<!--              </div>-->
+<!--              <div class="form-group">-->
+<!--                <label for="parentLogin">Login (e-mail) :</label>-->
+<!--                <input type="email" ngModel maxlength="20" minlength="2" name="login" class="form-control" id="parentLogin"-->
+<!--                       placeholder="E-mail"  required>-->
+<!--              </div>-->
+<!--              <div class="form-group">-->
+<!--                <label for="parentPassword">Password :</label>-->
+<!--                <input type="password" ngModel maxlength="20" minlength="2" name="password" class="form-control" id="parentPassword"-->
+<!--                       placeholder="Password"  required>-->
+<!--              </div>-->
+<!--              <div class="form-group">-->
+<!--                <label for="parentImageUrl">image Url :</label>-->
+<!--                <input type="text" ngModel maxlength="20" minlength="2" name="imageUrl" class="form-control" id="parentImageUrl"-->
+<!--                       placeholder="imageUrl"  required>-->
+<!--              </div>-->
+<!--              <div class="form-group">-->
+<!--                <label for="parentJoined">Joined :</label>-->
+<!--                <input type="date"  name="joined" class="form-control" id="parentJoined"-->
+<!--                       placeholder="Joined"  required>-->
+<!--              </div>-->
+<!--              <div class="form-group">-->
+<!--                <select name="status" ngModel class="form-control" >-->
+<!--                  <option value="YES">YES</option>-->
+<!--                  <option value="NO">NO</option>-->
+<!--                </select>-->
+<!--              </div>-->
+<!--              <div class="form-group">-->
+<!--                <input type="hidden" ngModel="GUARDIAN" maxlength="20" minlength="2" name="role" class="form-control" id="guardianRole"-->
+<!--                       placeholder="Guardian Password"  required>-->
+<!--              </div>-->
+
+<!--            </div>-->
+<!--            <div class="modal-footer">-->
+<!--              <button type="button" id="add-parent-form" class="btn btn-secondary" data-dismiss="modal">Close-->
+<!--              </button>-->
+<!--              <button [disabled]="parentForm.invalid" type="submit" class="btn btn-primary">Save</button>-->
+<!--            </div>-->
+
+<!--          </form>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--    </div>-->
+
+
+<!--    &lt;!&ndash;    <div class="modal fade" id="addParentModal" tabindex="-1" role="dialog"&ndash;&gt;-->
+<!--    &lt;!&ndash;         aria-labelledby="addParentModalLabel" aria-hidden="true">&ndash;&gt;-->
+<!--    &lt;!&ndash;      <div class="modal-dialog" role="document">&ndash;&gt;-->
+<!--    &lt;!&ndash;        <div class="modal-content">&ndash;&gt;-->
+<!--    &lt;!&ndash;          <div class="modal-header">&ndash;&gt;-->
+<!--    &lt;!&ndash;            <h5 class="modal-title" id="addParentModalLabel">Add Parent</h5>&ndash;&gt;-->
+<!--    &lt;!&ndash;            <button type="button" class="close" data-dismiss="modal" aria-label="Close">&ndash;&gt;-->
+<!--    &lt;!&ndash;              <span aria-hidden="true">&times;</span>&ndash;&gt;-->
+<!--    &lt;!&ndash;            </button>&ndash;&gt;-->
+<!--    &lt;!&ndash;          </div>&ndash;&gt;-->
+<!--    &lt;!&ndash;          <div class="modal-body">&ndash;&gt;-->
+<!--    &lt;!&ndash;            <form #addFormParent="ngForm" (ngSubmit)="addParent(addFormParent)">&ndash;&gt;-->
+<!--    &lt;!&ndash;              <div class="form-group">&ndash;&gt;-->
+<!--    &lt;!&ndash;                <label for="parentName">Name :</label>&ndash;&gt;-->
+<!--    &lt;!&ndash;                <input type="text" ngModel maxlength="20" minlength="2" name="name" class="form-control" id="parentName"&ndash;&gt;-->
+<!--    &lt;!&ndash;                       placeholder="Name"  required>&ndash;&gt;-->
+<!--    &lt;!&ndash;              </div>&ndash;&gt;-->
+<!--    &lt;!&ndash;              <div class="form-group">&ndash;&gt;-->
+<!--    &lt;!&ndash;                <label for="parentSurname">Surname :</label>&ndash;&gt;-->
+<!--    &lt;!&ndash;                <input type="text" ngModel maxlength="20" minlength="2" name="surname" class="form-control" id="parentSurname"&ndash;&gt;-->
+<!--    &lt;!&ndash;                       placeholder="Surname"  required>&ndash;&gt;-->
+<!--    &lt;!&ndash;              </div>&ndash;&gt;-->
+<!--    &lt;!&ndash;              <div class="form-group">&ndash;&gt;-->
+<!--    &lt;!&ndash;                <label for="parentLogin">Login (e-mail) :</label>&ndash;&gt;-->
+<!--    &lt;!&ndash;                <input type="email" ngModel maxlength="20" minlength="2" name="login" class="form-control" id="parentLogin"&ndash;&gt;-->
+<!--    &lt;!&ndash;                       placeholder="E-mail"  required>&ndash;&gt;-->
+<!--    &lt;!&ndash;              </div>&ndash;&gt;-->
+<!--    &lt;!&ndash;              <div class="form-group">&ndash;&gt;-->
+<!--    &lt;!&ndash;                <label for="parentPassword">Password :</label>&ndash;&gt;-->
+<!--    &lt;!&ndash;                <input type="password" ngModel maxlength="20" minlength="2" name="password" class="form-control" id="parentPassword"&ndash;&gt;-->
+<!--    &lt;!&ndash;                       placeholder="Password"  required>&ndash;&gt;-->
+<!--    &lt;!&ndash;              </div>&ndash;&gt;-->
+<!--    &lt;!&ndash;              <div class="form-group">&ndash;&gt;-->
+<!--    &lt;!&ndash;                <label for="parentImageUrl">image Url :</label>&ndash;&gt;-->
+<!--    &lt;!&ndash;                <input type="text" ngModel maxlength="20" minlength="2" name="imageUrl" class="form-control" id="parentImageUrl"&ndash;&gt;-->
+<!--    &lt;!&ndash;                       placeholder="imageUrl"  required>&ndash;&gt;-->
+<!--    &lt;!&ndash;              </div>&ndash;&gt;-->
+<!--    &lt;!&ndash;              <div class="form-group">&ndash;&gt;-->
+<!--    &lt;!&ndash;                <label for="parentJoined">Joined :</label>&ndash;&gt;-->
+<!--    &lt;!&ndash;                <input type="date"  name="joined" class="form-control" id="parentJoined"&ndash;&gt;-->
+<!--    &lt;!&ndash;                       placeholder="Joined"  required>&ndash;&gt;-->
+<!--    &lt;!&ndash;              </div>&ndash;&gt;-->
+<!--    &lt;!&ndash;              <div class="form-group">&ndash;&gt;-->
+<!--    &lt;!&ndash;                <select name="status" ngModel class="form-control" >&ndash;&gt;-->
+<!--    &lt;!&ndash;                  <option value="YES">YES</option>&ndash;&gt;-->
+<!--    &lt;!&ndash;                  <option value="NO">NO</option>&ndash;&gt;-->
+<!--    &lt;!&ndash;                </select>&ndash;&gt;-->
+<!--    &lt;!&ndash;              </div>&ndash;&gt;-->
+<!--    &lt;!&ndash;              <div class="form-group">&ndash;&gt;-->
+<!--    &lt;!&ndash;                <input type="hidden" ngModel="GUARDIAN" maxlength="20" minlength="2" name="role" class="form-control" id="guardianRole"&ndash;&gt;-->
+<!--    &lt;!&ndash;                       placeholder="Guardian Password"  required>&ndash;&gt;-->
+<!--    &lt;!&ndash;              </div>&ndash;&gt;-->
+<!--    &lt;!&ndash;              <div class="modal-footer">&ndash;&gt;-->
+<!--    &lt;!&ndash;                <button type="button" id="add-trainer-form" class="btn btn-secondary" data-dismiss="modal">Close&ndash;&gt;-->
+<!--    &lt;!&ndash;                </button>&ndash;&gt;-->
+<!--    &lt;!&ndash;                <button [disabled]="addFormParent.invalid" type="submit" class="btn btn-primary">Save</button>&ndash;&gt;-->
+<!--    &lt;!&ndash;              </div>&ndash;&gt;-->
+<!--    &lt;!&ndash;            </form>&ndash;&gt;-->
+<!--    &lt;!&ndash;          </div>&ndash;&gt;-->
+<!--    &lt;!&ndash;        </div>&ndash;&gt;-->
+<!--    &lt;!&ndash;      </div>&ndash;&gt;-->
+<!--    &lt;!&ndash;    </div>&ndash;&gt;-->
+
+
+
+<!--  </div>-->
+
+
+<!--</div>-->

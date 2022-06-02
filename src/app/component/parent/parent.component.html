@@ -125,155 +125,155 @@
     <!--  INFO Parent-->
 
 
-    <!--    <div class="modal fade" id="infoParent" tabindex="-1" role="dialog" aria-labelledby="infoParentModalLabel"-->
-    <!--         aria-hidden="true">-->
-    <!--      <div class="modal-dialog " style="max-width: 1100px;" role="document">-->
-    <!--        <div class="modal-content">-->
-    <!--          <div class="modal-header">-->
-    <!--            <div class="container bootstrap snippets bootdey">-->
-    <!--              <div class="row">-->
-    <!--                <div class="col-lg-12">-->
-    <!--                  <div class="main-box no-header clearfix">-->
-    <!--                    <div class="main-box-body clearfix">-->
-    <!--                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">-->
-    <!--                        <span aria-hidden="true">&times;</span>-->
-    <!--                      </button>-->
-    <!--                      <form class="form-inline my-2 my-lg-0">-->
-    <!--                        <h2>Info about {{setInfoParent?.name}} {{setInfoParent?.surname}}</h2>-->
-    <!--                        <button style="margin-left: 250px; margin-bottom: 15px; text-transform: uppercase"-->
-    <!--                                (click)="printReportParentInfoPdf()" type="button" class="btn btn-primary">Download-->
-    <!--                          .pdf-->
-    <!--                        </button>-->
-    <!--                      </form>-->
-    <!--                      <div class="table-responsive">-->
+        <div class="modal fade" id="infoParent" tabindex="-1" role="dialog" aria-labelledby="infoParentModalLabel"
+             aria-hidden="true">
+          <div class="modal-dialog " style="max-width: 1100px;" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <div class="container bootstrap snippets bootdey">
+                  <div class="row">
+                    <div class="col-lg-12">
+                      <div class="main-box no-header clearfix">
+                        <div class="main-box-body clearfix">
+                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                          </button>
+                          <form class="form-inline my-2 my-lg-0">
+                            <h2>Info about {{setInfoParent?.name}} {{setInfoParent?.surname}}</h2>
+                            <button style="margin-left: 250px; margin-bottom: 15px; text-transform: uppercase"
+                                    (click)="printReportParentInfoPdf()" type="button" class="btn btn-success">Download
+                              .pdf
+                            </button>
+                          </form>
+                          <div class="table-responsive">
 
-    <!--                        <div class="container bootstrap snippets bootdey">-->
-    <!--                          <div class="panel-body inf-content">-->
-    <!--                            <div class="row">-->
-    <!--                              <div class="col-md-4">-->
-    <!--                                <img alt="" style="width:600px;" title="" class="img-circle img-thumbnail isTooltip"-->
-    <!--                                     src="{{setInfoParent.imageUrl}}" data-original-title="Usuario">-->
-    <!--                                <ul title="Ratings" class="list-inline ratings text-center">-->
-    <!--                                  <li><a href="#"><span class="glyphicon glyphicon-star"></span></a></li>-->
-    <!--                                  <li><a href="#"><span class="glyphicon glyphicon-star"></span></a></li>-->
-    <!--                                  <li><a href="#"><span class="glyphicon glyphicon-star"></span></a></li>-->
-    <!--                                  <li><a href="#"><span class="glyphicon glyphicon-star"></span></a></li>-->
-    <!--                                  <li><a href="#"><span class="glyphicon glyphicon-star"></span></a></li>-->
-    <!--                                </ul>-->
-    <!--                              </div>-->
-    <!--                              <div class="col-md-6">-->
-    <!--                                <strong>Information</strong><br>-->
-    <!--                                <div class="table-responsive">-->
-    <!--                                  <table class="table table-user-information">-->
-    <!--                                    <tbody>-->
-    <!--                                    <tr>-->
-    <!--                                      <td>-->
-    <!--                                        <strong>-->
-    <!--                                          <span class="glyphicon glyphicon-asterisk text-primary"></span>-->
-    <!--                                          Identificacion-->
-    <!--                                        </strong>-->
-    <!--                                      </td>-->
-    <!--                                      <td class="text-primary">-->
-    <!--                                        {{setInfoParent?.id}}-->
-    <!--                                      </td>-->
-    <!--                                    </tr>-->
-    <!--                                    <tr>-->
-    <!--                                      <td>-->
-    <!--                                        <strong>-->
-    <!--                                          <span class="glyphicon glyphicon-user  text-primary"></span>-->
-    <!--                                          Name-->
-    <!--                                        </strong>-->
-    <!--                                      </td>-->
-    <!--                                      <td class="text-primary">-->
-    <!--                                        {{setInfoParent?.name}}-->
-    <!--                                      </td>-->
-    <!--                                    </tr>-->
-    <!--                                    <tr>-->
-    <!--                                      <td>-->
-    <!--                                        <strong>-->
-    <!--                                          <span class="glyphicon glyphicon-cloud text-primary"></span>-->
-    <!--                                          Lastname-->
-    <!--                                        </strong>-->
-    <!--                                      </td>-->
-    <!--                                      <td class="text-primary">-->
-    <!--                                        {{setInfoParent?.surname}}-->
-    <!--                                      </td>-->
-    <!--                                    </tr>-->
+                            <div class="container bootstrap snippets bootdey">
+                              <div class="panel-body inf-content">
+                                <div class="row">
+                                  <div class="col-md-4">
+                                    <img alt="" style="width:600px;" title="" class="img-circle img-thumbnail isTooltip"
+                                         src="{{setInfoParent?.imageUrl}}" data-original-title="Usuario">
+                                    <ul title="Ratings" class="list-inline ratings text-center">
+                                      <li><a href="#"><span class="glyphicon glyphicon-star"></span></a></li>
+                                      <li><a href="#"><span class="glyphicon glyphicon-star"></span></a></li>
+                                      <li><a href="#"><span class="glyphicon glyphicon-star"></span></a></li>
+                                      <li><a href="#"><span class="glyphicon glyphicon-star"></span></a></li>
+                                      <li><a href="#"><span class="glyphicon glyphicon-star"></span></a></li>
+                                    </ul>
+                                  </div>
+                                  <div class="col-md-6">
+                                    <strong>Information</strong><br>
+                                    <div class="table-responsive">
+                                      <table class="table table-user-information">
+                                        <tbody>
+                                        <tr>
+                                          <td>
+                                            <strong>
+                                              <span class="glyphicon glyphicon-asterisk text-primary"></span>
+                                              Identificacion
+                                            </strong>
+                                          </td>
+                                          <td class="text-primary">
+                                            {{setInfoParent?.id}}
+                                          </td>
+                                        </tr>
+                                        <tr>
+                                          <td>
+                                            <strong>
+                                              <span class="glyphicon glyphicon-user  text-primary"></span>
+                                              Name
+                                            </strong>
+                                          </td>
+                                          <td class="text-primary">
+                                            {{setInfoParent?.name}}
+                                          </td>
+                                        </tr>
+                                        <tr>
+                                          <td>
+                                            <strong>
+                                              <span class="glyphicon glyphicon-cloud text-primary"></span>
+                                              Lastname
+                                            </strong>
+                                          </td>
+                                          <td class="text-primary">
+                                            {{setInfoParent?.surname}}
+                                          </td>
+                                        </tr>
 
-    <!--                                    <tr>-->
-    <!--                                      <td>-->
-    <!--                                        <strong>-->
-    <!--                                          <span class="glyphicon glyphicon-bookmark text-primary"></span>-->
-    <!--                                          Username-->
-    <!--                                        </strong>-->
-    <!--                                      </td>-->
-    <!--                                      <td class="text-primary">-->
-    <!--                                        {{setInfoParent?.login}}-->
-    <!--                                      </td>-->
-    <!--                                    </tr>-->
+                                        <tr>
+                                          <td>
+                                            <strong>
+                                              <span class="glyphicon glyphicon-bookmark text-primary"></span>
+                                              Username
+                                            </strong>
+                                          </td>
+                                          <td class="text-primary">
+                                            {{setInfoParent?.login}}
+                                          </td>
+                                        </tr>
 
 
-    <!--                                    <tr>-->
-    <!--                                      <td>-->
-    <!--                                        <strong>-->
-    <!--                                          <span class="glyphicon glyphicon-eye-open text-primary"></span>-->
-    <!--                                          Role-->
-    <!--                                        </strong>-->
-    <!--                                      </td>-->
-    <!--                                      <td class="text-primary">-->
-    <!--                                        {{setInfoParent?.role}}-->
-    <!--                                      </td>-->
-    <!--                                    </tr>-->
-    <!--                                    <tr>-->
-    <!--                                      <td>-->
-    <!--                                        <strong>-->
-    <!--                                          <span class="glyphicon glyphicon-envelope text-primary"></span>-->
-    <!--                                          Email-->
-    <!--                                        </strong>-->
-    <!--                                      </td>-->
-    <!--                                      <td class="text-primary">-->
-    <!--                                        {{setInfoParent?.login}}-->
-    <!--                                      </td>-->
-    <!--                                    </tr>-->
-    <!--                                    <tr>-->
-    <!--                                      <td>-->
-    <!--                                        <strong>-->
-    <!--                                          <span class="glyphicon glyphicon-calendar text-primary"></span>-->
-    <!--                                          created-->
-    <!--                                        </strong>-->
-    <!--                                      </td>-->
-    <!--                                      <td class="text-primary">-->
-    <!--                                        {{setInfoParent?.joined}}-->
-    <!--                                      </td>-->
-    <!--                                    </tr>-->
-    <!--                                    <tr>-->
-    <!--                                      <td>-->
-    <!--                                        <strong>-->
-    <!--                                          <span class="glyphicon glyphicon-calendar text-primary"></span>-->
-    <!--                                          Modified-->
-    <!--                                        </strong>-->
-    <!--                                      </td>-->
-    <!--                                      <td class="text-primary">-->
-    <!--                                        {{setInfoParent?.joined}}-->
-    <!--                                      </td>-->
-    <!--                                    </tr>-->
-    <!--                                    </tbody>-->
-    <!--                                  </table>-->
-    <!--                                </div>-->
-    <!--                              </div>-->
-    <!--                            </div>-->
-    <!--                          </div>-->
-    <!--                        </div>-->
-    <!--                      </div>-->
-    <!--                    </div>-->
-    <!--                  </div>-->
-    <!--                </div>-->
-    <!--              </div>-->
-    <!--            </div>-->
-    <!--          </div>-->
-    <!--        </div>-->
-    <!--      </div>-->
-    <!--    </div>-->
+                                        <tr>
+                                          <td>
+                                            <strong>
+                                              <span class="glyphicon glyphicon-eye-open text-primary"></span>
+                                              Role
+                                            </strong>
+                                          </td>
+                                          <td class="text-primary">
+                                            {{setInfoParent?.role}}
+                                          </td>
+                                        </tr>
+                                        <tr>
+                                          <td>
+                                            <strong>
+                                              <span class="glyphicon glyphicon-envelope text-primary"></span>
+                                              Email
+                                            </strong>
+                                          </td>
+                                          <td class="text-primary">
+                                            {{setInfoParent?.login}}
+                                          </td>
+                                        </tr>
+                                        <tr>
+                                          <td>
+                                            <strong>
+                                              <span class="glyphicon glyphicon-calendar text-primary"></span>
+                                              created
+                                            </strong>
+                                          </td>
+                                          <td class="text-primary">
+                                            {{setInfoParent?.joined}}
+                                          </td>
+                                        </tr>
+                                        <tr>
+                                          <td>
+                                            <strong>
+                                              <span class="glyphicon glyphicon-calendar text-primary"></span>
+                                              Modified
+                                            </strong>
+                                          </td>
+                                          <td class="text-primary">
+                                            {{setInfoParent?.joined}}
+                                          </td>
+                                        </tr>
+                                        </tbody>
+                                      </table>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
 
 
     <!-- Add   -->
@@ -381,7 +381,7 @@
 
                 <div class="form-group">
                   <!--                <label for="guardianLoginEdit">Login(email):</label>-->
-                  <input type="" ngModel="{{editParent?.login}}" name="login"
+                  <input type="text" ngModel="{{editParent?.login}}" name="login"
                          class="form-control" id="guardianLoginEdit" placeholder="" readonly>
                 </div>
 

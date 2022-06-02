@@ -33,6 +33,10 @@
              placeholder="Search trainer..." required>
     </form>
   </nav>
+
+  <!--  ALL LIST-->
+
+
   <div class="content" style=" margin-top: 110px;  ">
 
     <div class="container bootstrap snippets bootdey">
@@ -47,7 +51,7 @@
                   <tr>
                     <th><span>Trainer</span></th>
 
-                    <th><span>Created</span></th>
+                    <th><span>Joined</span></th>
                     <th class="text-center"><span>Status</span>
 
                     </th>
@@ -60,12 +64,14 @@
                   <tr>
 
                     <td>
-                      <img src="{{trainer.imageUrl}}" alt="" width="50" height="50">
+<!--                      <img src="{{trainer.imageUrl}}" alt="" width="50" height="50">-->
                       <a class="user-link">{{trainer.name}} {{trainer.surname}}</a>
+                      <br>
                       <span class="user-subhead">{{trainer.role}}</span>
                     </td>
 
                     <td>{{trainer.joined}}</td>
+                    <td class="text-center">{{trainer.status}}</td>
 
                     <td>
                       <a href="#">{{trainer.login}}</a>

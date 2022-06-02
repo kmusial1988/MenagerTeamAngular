@@ -3,6 +3,7 @@ import {Parent} from "../../model/parent";
 import {ParentService} from "../../service/parent.service";
 import {HttpErrorResponse} from "@angular/common/http";
 import {NgForm} from "@angular/forms";
+import {Trainer} from "../../model/trainer";
 
 @Component({
   selector: 'app-parent',
@@ -17,7 +18,7 @@ export class ParentComponent implements OnInit {
   public setInfoParent: Parent;
 
   constructor(
-    private parentService: ParentService,
+    private parentService: ParentService
   )  { }
 
 
@@ -33,7 +34,7 @@ export class ParentComponent implements OnInit {
         console.log(this.parents);
       },
       (error: HttpErrorResponse) => {
-        alert(error.message);
+        alert(error.error.message);
       }
     );
   }
@@ -47,7 +48,7 @@ export class ParentComponent implements OnInit {
         addFormParent.reset();
       },
       (error: HttpErrorResponse) => {
-        alert(error.message);
+        alert(error.error.message);
         addFormParent.reset();
       }
     );
@@ -59,7 +60,7 @@ export class ParentComponent implements OnInit {
         this.getParents();
       },
       (error: HttpErrorResponse) => {
-        alert(error.message);
+        alert(error.error.message);
       }
     );
   }
@@ -71,9 +72,27 @@ export class ParentComponent implements OnInit {
         this.getParents();
       },
       (error: HttpErrorResponse) => {
-        alert(error.message);
+        alert(error.error.message);
       }
     );
+  }
+
+  public searchParent(key: string): void {
+    console.log(key);
+    const results: Trainer[] = [];
+    for (const parent of this.parents) {
+      if (parent.name.toLowerCase().indexOf(key.toLowerCase()) !== -1
+        || parent.surname.toLowerCase().indexOf(key.toLowerCase()) !== -1
+        || parent.login.toLowerCase().indexOf(key.toLowerCase()) !== -1
+      )
+      {
+        results.push(parent);
+      }
+    }
+    this.parents = results;
+    if (results.length === 0 || !key) {
+      this.getParents();
+    }
   }
 
 

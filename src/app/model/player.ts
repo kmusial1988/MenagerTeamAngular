@@ -12,6 +12,7 @@ export interface  Player{
   joined: string;
   status: Status;
   role: Role;
+  parentLogin: string;
 
 
 }

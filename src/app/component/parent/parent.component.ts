@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Parent} from "../../model/parent";
 import {ParentService} from "../../service/parent.service";
 import {HttpErrorResponse} from "@angular/common/http";
 import {NgForm} from "@angular/forms";
-import {Trainer} from "../../model/trainer";
+import {Player} from "../../model/player";
+import {PlayerService} from "../../service/player.service";
 
 @Component({
   selector: 'app-parent',
@@ -16,14 +17,19 @@ export class ParentComponent implements OnInit {
   public editParent: Parent;
   public toDeleteParent: Parent;
   public setInfoParent: Parent;
+  public addPlayerToParent: Parent;
+  public addPlayerToParentButton: Parent;
+  public players: Player[];
 
   constructor(
-    private parentService: ParentService
+    private parentService: ParentService,
+    private playerService: PlayerService
   )  { }
 
 
   ngOnInit() {
     this.getParents();
+    this.getPlayers();
   }
 
 
@@ -32,6 +38,17 @@ export class ParentComponent implements OnInit {
       (response: Parent[]) => {
         this.parents = response;
         console.log(this.parents);
+      },
+      (error: HttpErrorResponse) => {
+        alert(error.error.message);
+      }
+    );
+  }
+  public getPlayers(): void{
+    this.playerService.getPlayer().subscribe(
+      (response: Player[]) => {
+        this.players = response;
+        console.log(this.players);
       },
       (error: HttpErrorResponse) => {
         alert(error.error.message);
@@ -53,6 +70,22 @@ export class ParentComponent implements OnInit {
       }
     );
   }
+
+  public addPlayer(addFormPlayer: NgForm): void {
+    document.getElementById('add-player-form').click();
+    this.playerService.addPlayer(addFormPlayer.value).subscribe(
+      (response: Player) => {
+        console.log(response);
+        // this.getPlayers();
+        addFormPlayer.reset();
+      },
+      (error: HttpErrorResponse) => {
+        alert(error.error.message);
+        addFormPlayer.reset();
+      }
+    );
+  }
+
   public updateParent(parent: Parent): void {
     this.parentService.updateParent(parent).subscribe(
       (response: Parent) => {
@@ -106,6 +139,10 @@ export class ParentComponent implements OnInit {
     if(mode === 'addParent') {
       button.setAttribute('data-target', '#addParentModal');
     }
+    if(mode === 'addPlayerToParentButton') {
+      this.addPlayerToParentButton = parent;
+      button.setAttribute('data-target', '#addPlayerToParentButton');
+    }
 
     if(mode === 'updateParent') {
       this.editParent = parent;
@@ -119,6 +156,10 @@ export class ParentComponent implements OnInit {
     if(mode === 'infoParent') {
       this.setInfoParent = parent;
       button.setAttribute('data-target', '#infoParent');
+    }
+    if(mode === 'addPlayerToParent') {
+      this.addPlayerToParent = parent;
+      button.setAttribute('data-target', '#addPlayerToParent');
     }
 
 

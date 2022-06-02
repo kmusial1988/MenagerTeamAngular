@@ -100,6 +100,23 @@
                                                 <i class="fa fa-trash-o fa-stack-1x fa-inverse"></i>
                                             </span>
                       </a>
+                      <a (click)="onOpenModal(parent, 'addPlayerToParent')" data-toggle="modal"
+                         class="table-link text-info">
+                                            <span class="fa-stack">
+                                                <i class="fa fa-square fa-stack-2x"></i>
+                                                <i class="fa fa-list fa-stack-1x fa-inverse"></i>
+                                            </span>
+                      </a>
+                      <a (click)="onOpenModal(null, 'addPlayerToParentButton')" data-toggle="modal"
+                         class="table-link text-info">
+                                            <span class="fa-stack">
+                                                <i class="fa fa-square fa-stack-2x"></i>
+                                                <i class="fa fa-plus fa-stack-1x fa-inverse"></i>
+                                            </span>
+                      </a>
+
+
+
                     </td>
                   </tr>
 
@@ -121,6 +138,192 @@
       </div>
     </div>
 
+
+<!--    Add Player to Parent-->
+    <div class="modal fade" id="addPlayerToParent" tabindex="-1" role="dialog" aria-labelledby="addPlayerToParentLabel"
+         aria-hidden="true">
+      <div class="modal-dialog " style="max-width: 1100px;" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <div class="container bootstrap snippets bootdey">
+              <div class="row">
+                <div class="col-lg-12">
+                  <div class="main-box no-header clearfix">
+                    <div class="main-box-body clearfix">
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                      <form class="form-inline my-2 my-lg-0">
+                        <h2>Players, parent {{addPlayerToParent?.login}}</h2>
+                        <button style="margin-left: 250px; margin-bottom: 15px; text-transform: uppercase"
+                                (click)="printReportParentInfoPdf()" type="button" class="btn btn-success">Download
+                          .pdf
+                        </button>
+                        <button (click)="onOpenModal(null, 'addPlayerToParentButton')" class="btn btn-success" data-toggle="modal"
+                                style="margin:0 100px ">
+                          <span>Add Player</span>
+                        </button>
+
+                      </form>
+
+                      <div class="table-responsive">
+                        <table class="table user-list">
+
+                          <thead>
+                          <tr>
+                            <th><span>Player</span></th>
+
+                            <th><span>Joined</span></th>
+                            <th class="text-center"><span>Status</span>
+
+                            </th>
+                            <th><span>Email</span></th>
+                            <th>
+                            </th>
+                          </tr>
+                          </thead>
+                          <tbody *ngFor="let player of players">
+                          <ng-container *ngIf="player.parentLogin === (addPlayerToParent?.login)">
+                          <tr>
+
+                            <td>
+                              <!--                      <img src="{{trainer.imageUrl}}" alt="" width="50" height="50">-->
+                              <a class="user-link">{{player.surname}} {{player.name}}</a>
+                              <br>
+                              <span class="user-subhead">{{player.role}}</span>
+                            </td>
+
+                            <td>{{player.joined}}</td>
+                            <td class="text-center">{{player.status}}</td>
+
+                            <td>
+                              <a href="#">{{player.login}}</a>
+                            </td>
+
+                            <td class="text-center" data-toggle="modal" style="width: 20%;">
+                              <a (click)="onOpenModal(player, 'infoPlayer')" class="table-link text-warning">
+                                            <span class="fa-stack">
+                                                <i class="fa fa-square fa-stack-2x"></i>
+                                                <i class="fa fa-search-plus fa-stack-1x fa-inverse"></i>
+                                            </span>
+                              </a>
+                              <a (click)="onOpenModal(player, 'updatePlayer')" data-toggle="modal"
+                                 class="table-link text-info">
+                                            <span class="fa-stack">
+                                                <i class="fa fa-square fa-stack-2x"></i>
+                                                <i class="fa fa-pencil fa-stack-1x fa-inverse"></i>
+                                            </span>
+                              </a>
+                              <a (click)="onOpenModal(player, 'deletePlayer')" data-toggle="modal"
+                                 class="table-link danger">
+                                            <span class="fa-stack">
+                                                <i class="fa fa-square fa-stack-2x"></i>
+                                                <i class="fa fa-trash-o fa-stack-1x fa-inverse"></i>
+                                            </span>
+                              </a>
+                            </td>
+                          </tr>
+
+                          </ng-container>
+                          </tbody>
+
+                        </table>
+                        <div *ngIf="players?.length == 0" class="col-lg-12 col-md-12 col-xl-12">
+                          <div class="alert alert-info" role="alert">
+                            <h4 class="alert-heading">EMPTY LIST OF PLAYERS !</h4>
+                            <p>No players were found.</p>
+                          </div>
+                        </div>
+
+                      </div>
+
+
+
+
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Add  Player -->
+
+    <div class="modal fade" id="addPlayerToParentButton" tabindex="-1" role="dialog"
+         aria-labelledby="addParentLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="addParentLabel">Add player</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <form #addFormPlayer="ngForm" (ngSubmit)="addPlayer(addFormPlayer)">
+
+
+              <div class="form-group">
+<!--                <label for="organizationNameRoom">Organization name:</label>-->
+                <input type="text" ngModel="{{addPlayerToParent?.login}}" name="parentLogin"
+                       class="form-control" id="organizationNameRoom" readonly>
+              </div>
+
+              <div class="form-group">
+                <!--              <label for="parentName">Name :</label>-->
+                <input type="text" ngModel maxlength="20" minlength="2" name="name" class="form-control"
+                       placeholder="Name" required>
+              </div>
+              <div class="form-group">
+                <!--              <label for="parentSurname">Surname :</label>-->
+                <input type="text" ngModel maxlength="20" minlength="2" name="surname" class="form-control"
+
+                       placeholder="Surname" required>
+              </div>
+              <div class="form-group">
+                <!--              <label for="parentLogin">Login (e-mail) :</label>-->
+                <input type="email" ngModel maxlength="20" minlength="2" name="login" class="form-control"
+
+                       placeholder="E-mail" required>
+              </div>
+              <div class="form-group">
+                <!--              <label for="parentPassword">Password :</label>-->
+                <input type="password" ngModel maxlength="20" minlength="2" name="password" class="form-control"
+
+                       placeholder="Password" required>
+              </div>
+              <div class="form-group">
+                <!--              <label for="parentImageUrl">image Url :</label>-->
+                <input type="text" ngModel name="imageUrl" class="form-control"
+
+                       placeholder="imageUrl" required>
+              </div>
+              <div class="form-group">
+                <!--              <label for="parentJoined">Joined :</label>-->
+                <input type="date" ngModel name="joined" class="form-control"
+                       placeholder="Joined" required>
+              </div>
+              <div class="form-group">
+                <input type="hidden" ngModel="NO" name="status" class="form-control" >
+              </div>
+              <div class="form-group">
+                <input type="hidden" ngModel="PARENT" maxlength="20" minlength="2" name="role" class="form-control">
+              </div>
+
+
+              <div class="modal-footer">
+                <button type="button" id="add-player-form" class="btn btn-secondary" data-dismiss="modal">Close
+                </button>
+                <button [disabled]="addFormPlayer.invalid" type="submit" class="btn btn-primary">Save</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
 
     <!--  INFO Parent-->
 

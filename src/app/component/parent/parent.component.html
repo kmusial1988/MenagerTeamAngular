@@ -100,14 +100,14 @@
                                                 <i class="fa fa-trash-o fa-stack-1x fa-inverse"></i>
                                             </span>
                       </a>
-                      <a (click)="onOpenModal(parent, 'addPlayerToParent')" data-toggle="modal"
+                      <a (click)="onOpenModal(parent, 'playerParent')" data-toggle="modal"
                          class="table-link text-info">
                                             <span class="fa-stack">
                                                 <i class="fa fa-square fa-stack-2x"></i>
                                                 <i class="fa fa-list fa-stack-1x fa-inverse"></i>
                                             </span>
                       </a>
-                      <a (click)="onOpenModal(null, 'addPlayerToParentButton')" data-toggle="modal"
+                      <a (click)="onOpenModal(parent, 'addPlayerToParent')" data-toggle="modal"
                          class="table-link text-info">
                                             <span class="fa-stack">
                                                 <i class="fa fa-square fa-stack-2x"></i>
@@ -139,8 +139,8 @@
     </div>
 
 
-<!--    Add Player to Parent-->
-    <div class="modal fade" id="addPlayerToParent" tabindex="-1" role="dialog" aria-labelledby="addPlayerToParentLabel"
+<!--    list Player to Parent-->
+    <div class="modal fade" id="playerParent" tabindex="-1" role="dialog" aria-labelledby="addPlayerToParentLabel"
          aria-hidden="true">
       <div class="modal-dialog " style="max-width: 1100px;" role="document">
         <div class="modal-content">
@@ -154,14 +154,10 @@
                         <span aria-hidden="true">&times;</span>
                       </button>
                       <form class="form-inline my-2 my-lg-0">
-                        <h2>Players, parent {{addPlayerToParent?.login}}</h2>
+                        <h2>Players, parent {{playerParent?.login}}</h2>
                         <button style="margin-left: 250px; margin-bottom: 15px; text-transform: uppercase"
                                 (click)="printReportParentInfoPdf()" type="button" class="btn btn-success">Download
                           .pdf
-                        </button>
-                        <button (click)="onOpenModal(null, 'addPlayerToParentButton')" class="btn btn-success" data-toggle="modal"
-                                style="margin:0 100px ">
-                          <span>Add Player</span>
                         </button>
 
                       </form>
@@ -183,7 +179,7 @@
                           </tr>
                           </thead>
                           <tbody *ngFor="let player of players">
-                          <ng-container *ngIf="player.parentLogin === (addPlayerToParent?.login)">
+                          <ng-container *ngIf="player.parentLogin === (playerParent?.login)">
                           <tr>
 
                             <td>
@@ -201,20 +197,20 @@
                             </td>
 
                             <td class="text-center" data-toggle="modal" style="width: 20%;">
-                              <a (click)="onOpenModal(player, 'infoPlayer')" class="table-link text-warning">
+                              <a (click)="onOpenModalPlayer(player, 'infoPlayer')" class="table-link text-warning">
                                             <span class="fa-stack">
                                                 <i class="fa fa-square fa-stack-2x"></i>
                                                 <i class="fa fa-search-plus fa-stack-1x fa-inverse"></i>
                                             </span>
                               </a>
-                              <a (click)="onOpenModal(player, 'updatePlayer')" data-toggle="modal"
+                              <a (click)="onOpenModalPlayer(player, 'updatePlayer')" data-toggle="modal"
                                  class="table-link text-info">
                                             <span class="fa-stack">
                                                 <i class="fa fa-square fa-stack-2x"></i>
                                                 <i class="fa fa-pencil fa-stack-1x fa-inverse"></i>
                                             </span>
                               </a>
-                              <a (click)="onOpenModal(player, 'deletePlayer')" data-toggle="modal"
+                              <a (click)="onOpenModalPlayer(player, 'deletePlayer')" data-toggle="modal"
                                  class="table-link danger">
                                             <span class="fa-stack">
                                                 <i class="fa fa-square fa-stack-2x"></i>
@@ -234,12 +230,7 @@
                             <p>No players were found.</p>
                           </div>
                         </div>
-
                       </div>
-
-
-
-
                     </div>
                   </div>
                 </div>
@@ -252,7 +243,7 @@
 
     <!-- Add  Player -->
 
-    <div class="modal fade" id="addPlayerToParentButton" tabindex="-1" role="dialog"
+    <div class="modal fade" id="addPlayerToParent" tabindex="-1" role="dialog"
          aria-labelledby="addParentLabel" aria-hidden="true">
       <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -269,7 +260,7 @@
               <div class="form-group">
 <!--                <label for="organizationNameRoom">Organization name:</label>-->
                 <input type="text" ngModel="{{addPlayerToParent?.login}}" name="parentLogin"
-                       class="form-control" id="organizationNameRoom" readonly>
+                       class="form-control" id="organizationNameRoom" required readonly>
               </div>
 
               <div class="form-group">
@@ -631,12 +622,12 @@
 
 
     <!-- Delete Modal -->
-    <div class="modal fade" id="deleteParentModal" tabindex="-1" role="dialog" aria-labelledby="deleteModelLabel"
+    <div class="modal fade" id="deleteParentModal" tabindex="-1" role="dialog" aria-labelledby="deleteModelLabelParent"
          aria-hidden="true">
       <div class="modal-dialog" role="document">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title" id="deleteModelLabel">Delete parent</h5>
+            <h5 class="modal-title" id="deleteModelLabelParent">Delete parent</h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>
@@ -654,6 +645,267 @@
       </div>
     </div>
 
+
+
+    <!-- Edit Modal Player-->
+
+    <div class="modal fade" id="updatePlayerModal" tabindex="-1" role="dialog"
+         aria-labelledby="updatePlayerModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="updatePlayerModalLabel">Edit
+              player: {{editPlayer?.login}}</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <form #editFormPlayer="ngForm">
+              <div class="form-group">
+
+                <input type="hidden" ngModel="{{editPlayer?.id}}" name="id" class="form-control"
+                       placeholder="">
+                <input type="hidden" ngModel="{{editPlayer?.role}}" name="role"
+                       class="form-control"  placeholder="">
+
+                <div class="form-group">
+                  <!--                <label for="guardianNameEdit">Name:</label>-->
+                  <input type="text" ngModel="{{editPlayer?.name}}" name="name"
+                         class="form-control"  placeholder="">
+                </div>
+
+                <div class="form-group">
+                  <!--                <label for="guardianSurnameEdit">Surname:</label>-->
+                  <input type="text" ngModel="{{editPlayer?.surname}}" name="surname"
+                         class="form-control"  placeholder="">
+                </div>
+
+                <div class="form-group">
+                  <!--                <label for="guardianLoginEdit">Login(email):</label>-->
+                  <input type="text" ngModel="{{editPlayer?.login}}" name="login"
+                         class="form-control"  placeholder="" readonly>
+                </div>
+
+                <div class="form-group">
+                  <!--                <label for="guardianPasswordEdit">Password:</label>-->
+                  <input type="password" ngModel="{{editPlayer?.password}}" name="password"
+                         class="form-control" placeholder="">
+                </div>
+
+                <div class="form-group">
+                  <!--                <label for="guardianSurnameEdit">Surname:</label>-->
+                  <input type="text" ngModel="{{editPlayer?.imageUrl}}" name="imageUrl"
+                         class="form-control"  placeholder="">
+                </div>
+
+                <div class="form-group">
+                  <!--                <label for="guardianLoginEdit">Login(email):</label>-->
+                  <input type="email" ngModel="{{editPlayer?.joined}}" name="joined"
+                         class="form-control" placeholder="">
+                </div>
+
+                <div class="form-group">
+                  <select name="status" ngModel class="form-control">
+                    <option value="YES">YES</option>
+                    <option value="NO">NO</option>
+                  </select>
+                </div>
+
+
+                <div class="modal-footer">
+                  <button type="button" id="aaa" data-dismiss="modal" class="btn btn-secondary">Close</button>
+                  <button (click)="updatePlayer(editFormPlayer.value)" data-dismiss="modal" class="btn btn-primary">Save
+                    changes
+                  </button>
+                </div>
+              </div>
+
+
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+
+    <!--  INFO player-->
+
+
+    <div class="modal fade" id="infoPlayer" tabindex="-1" role="dialog" aria-labelledby="infoPlayerModalLabel"
+         aria-hidden="true">
+      <div class="modal-dialog " style="max-width: 1100px;" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <div class="container bootstrap snippets bootdey">
+              <div class="row">
+                <div class="col-lg-12">
+                  <div class="main-box no-header clearfix">
+                    <div class="main-box-body clearfix">
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                      <form class="form-inline my-2 my-lg-0">
+                        <h2>Info about {{setInfoPlayer?.name}} {{setInfoPlayer?.surname}}</h2>
+                        <button style="margin-left: 250px; margin-bottom: 15px; text-transform: uppercase"
+                                (click)="printReportPlayerInfoPdf()" type="button" class="btn btn-success">Download
+                          .pdf
+                        </button>
+                      </form>
+                      <div class="table-responsive">
+
+                        <div class="container bootstrap snippets bootdey">
+                          <div class="panel-body inf-content">
+                            <div class="row">
+                              <div class="col-md-4">
+                                <img alt="" style="width:600px;" title="" class="img-circle img-thumbnail isTooltip"
+                                     src="{{setInfoPlayer?.imageUrl}}" data-original-title="Usuario">
+                                <ul title="Ratings" class="list-inline ratings text-center">
+                                  <li><a href="#"><span class="glyphicon glyphicon-star"></span></a></li>
+                                  <li><a href="#"><span class="glyphicon glyphicon-star"></span></a></li>
+                                  <li><a href="#"><span class="glyphicon glyphicon-star"></span></a></li>
+                                  <li><a href="#"><span class="glyphicon glyphicon-star"></span></a></li>
+                                  <li><a href="#"><span class="glyphicon glyphicon-star"></span></a></li>
+                                </ul>
+                              </div>
+                              <div class="col-md-6">
+                                <strong>Information</strong><br>
+                                <div class="table-responsive">
+                                  <table class="table table-user-information">
+                                    <tbody>
+                                    <tr>
+                                      <td>
+                                        <strong>
+                                          <span class="glyphicon glyphicon-asterisk text-primary"></span>
+                                          Identificacion
+                                        </strong>
+                                      </td>
+                                      <td class="text-primary">
+                                        {{setInfoPlayer?.id}}
+                                      </td>
+                                    </tr>
+                                    <tr>
+                                      <td>
+                                        <strong>
+                                          <span class="glyphicon glyphicon-user  text-primary"></span>
+                                          Name
+                                        </strong>
+                                      </td>
+                                      <td class="text-primary">
+                                        {{setInfoPlayer?.name}}
+                                      </td>
+                                    </tr>
+                                    <tr>
+                                      <td>
+                                        <strong>
+                                          <span class="glyphicon glyphicon-cloud text-primary"></span>
+                                          Lastname
+                                        </strong>
+                                      </td>
+                                      <td class="text-primary">
+                                        {{setInfoPlayer?.surname}}
+                                      </td>
+                                    </tr>
+
+                                    <tr>
+                                      <td>
+                                        <strong>
+                                          <span class="glyphicon glyphicon-bookmark text-primary"></span>
+                                          Username
+                                        </strong>
+                                      </td>
+                                      <td class="text-primary">
+                                        {{setInfoPlayer?.login}}
+                                      </td>
+                                    </tr>
+
+
+                                    <tr>
+                                      <td>
+                                        <strong>
+                                          <span class="glyphicon glyphicon-eye-open text-primary"></span>
+                                          Role
+                                        </strong>
+                                      </td>
+                                      <td class="text-primary">
+                                        {{setInfoPlayer?.role}}
+                                      </td>
+                                    </tr>
+                                    <tr>
+                                      <td>
+                                        <strong>
+                                          <span class="glyphicon glyphicon-envelope text-primary"></span>
+                                          Email
+                                        </strong>
+                                      </td>
+                                      <td class="text-primary">
+                                        {{setInfoPlayer?.login}}
+                                      </td>
+                                    </tr>
+                                    <tr>
+                                      <td>
+                                        <strong>
+                                          <span class="glyphicon glyphicon-calendar text-primary"></span>
+                                          created
+                                        </strong>
+                                      </td>
+                                      <td class="text-primary">
+                                        {{setInfoPlayer?.joined}}
+                                      </td>
+                                    </tr>
+                                    <tr>
+                                      <td>
+                                        <strong>
+                                          <span class="glyphicon glyphicon-calendar text-primary"></span>
+                                          Modified
+                                        </strong>
+                                      </td>
+                                      <td class="text-primary">
+                                        {{setInfoPlayer?.joined}}
+                                      </td>
+                                    </tr>
+                                    </tbody>
+                                  </table>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Delete Modal Player-->
+    <div class="modal fade" id="deletePlayerModal" tabindex="-1" role="dialog" aria-labelledby="deleteModelLabel"
+         aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="deleteModelLabel">Delete player</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <p>Do you want to delete player: {{toDeletePlayer?.login}} ?</p>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+              <button (click)="deletePlayer(toDeletePlayer?.id)" class="btn btn-danger"
+                      data-dismiss="modal">Yes
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
 
   </div>
 

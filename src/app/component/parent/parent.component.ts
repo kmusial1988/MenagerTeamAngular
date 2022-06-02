@@ -18,8 +18,12 @@ export class ParentComponent implements OnInit {
   public toDeleteParent: Parent;
   public setInfoParent: Parent;
   public addPlayerToParent: Parent;
-  public addPlayerToParentButton: Parent;
+  public playerParent: Parent;
+
   public players: Player[];
+  public editPlayer: Player;
+  public toDeletePlayer: Player;
+  public setInfoPlayer: Player;
 
   constructor(
     private parentService: ParentService,
@@ -76,7 +80,7 @@ export class ParentComponent implements OnInit {
     this.playerService.addPlayer(addFormPlayer.value).subscribe(
       (response: Player) => {
         console.log(response);
-        // this.getPlayers();
+        this.getPlayers();
         addFormPlayer.reset();
       },
       (error: HttpErrorResponse) => {
@@ -139,10 +143,7 @@ export class ParentComponent implements OnInit {
     if(mode === 'addParent') {
       button.setAttribute('data-target', '#addParentModal');
     }
-    if(mode === 'addPlayerToParentButton') {
-      this.addPlayerToParentButton = parent;
-      button.setAttribute('data-target', '#addPlayerToParentButton');
-    }
+
 
     if(mode === 'updateParent') {
       this.editParent = parent;
@@ -157,9 +158,90 @@ export class ParentComponent implements OnInit {
       this.setInfoParent = parent;
       button.setAttribute('data-target', '#infoParent');
     }
+
+    if(mode === 'playerParent') {
+      this.playerParent = parent;
+      button.setAttribute('data-target', '#playerParent');
+    }
+
     if(mode === 'addPlayerToParent') {
       this.addPlayerToParent = parent;
       button.setAttribute('data-target', '#addPlayerToParent');
+    }
+
+    container.appendChild(button);
+    button.click();
+  }
+
+  public printReportParentInfoPdf(): void{
+    window.print();
+  }
+
+
+  public updatePlayer(player: Player): void {
+    this.playerService.updatePlayer(player).subscribe(
+      (response: Player) => {
+        console.log(response);
+        this.getPlayers();
+      },
+      (error: HttpErrorResponse) => {
+        alert(error.error.message);
+      }
+    );
+  }
+
+  public deletePlayer(id: number): void {
+    this.playerService.deletePlayer(id).subscribe(
+      (response: void) => {
+        console.log(response);
+        this.getPlayers();
+      },
+      (error: HttpErrorResponse) => {
+        alert(error.error.message);
+      }
+    );
+  }
+
+  public searchPlayer(key: string): void {
+    console.log(key);
+    const results: Player[] = [];
+    for (const player of this.players) {
+      if (
+        player.name.toLowerCase().indexOf(key.toLowerCase()) !== -1
+        || player.surname.toLowerCase().indexOf(key.toLowerCase()) !== -1
+        || player.login.toLowerCase().indexOf(key.toLowerCase()) !== -1
+      )
+      {
+        results.push(player);
+      }
+    }
+    this.players = results;
+    if (results.length === 0 || !key) {
+      this.getPlayers();
+    }
+  }
+
+
+  public onOpenModalPlayer(player: Player, mode: string): void{
+    const container = document.getElementById('main-container')
+    const button = document.createElement('button');
+    button.type = 'button';
+    button.style.display = 'none';
+    button.setAttribute('data-toggle', 'modal');
+
+
+    if(mode === 'updatePlayer') {
+      this.editPlayer = player;
+      button.setAttribute('data-target', '#updatePlayerModal');
+    }
+    if(mode === 'deletePlayer') {
+      this.toDeletePlayer = player;
+      button.setAttribute('data-target', '#deletePlayerModal');
+    }
+
+    if(mode === 'infoPlayer') {
+      this.setInfoPlayer = player;
+      button.setAttribute('data-target', '#infoPlayer');
     }
 
 
@@ -167,7 +249,7 @@ export class ParentComponent implements OnInit {
     button.click();
   }
 
-  public printReportParentInfoPdf(): void{
+  public printReportPlayerInfoPdf(): void{
     window.print();
   }
 

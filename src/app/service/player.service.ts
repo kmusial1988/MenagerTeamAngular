@@ -27,7 +27,7 @@ export class PlayerService {
     return this.http.put<Player>(`${this.apiUrl}`, player);
   }
 
-  public deletePlayer(organizationId: number): Observable<void>{
-    return this.http.delete<void>(`${this.apiUrl}/${organizationId}`);
+  public deletePlayer(id: number): Observable<void>{
+    return this.http.delete<void>(`${this.apiUrl}/${id}`);
   }
 }

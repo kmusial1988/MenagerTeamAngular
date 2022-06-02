@@ -9,7 +9,7 @@ export interface  Player{
   login: string;
   password: string;
   imageUrl: string;
-  startWork: string;
+  joined: string;
   status: Status;
   role: Role;
 

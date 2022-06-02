@@ -79,7 +79,7 @@ export class ParentComponent implements OnInit {
 
   public searchParent(key: string): void {
     console.log(key);
-    const results: Trainer[] = [];
+    const results: Parent[] = [];
     for (const parent of this.parents) {
       if (parent.name.toLowerCase().indexOf(key.toLowerCase()) !== -1
         || parent.surname.toLowerCase().indexOf(key.toLowerCase()) !== -1

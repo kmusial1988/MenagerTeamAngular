@@ -2,7 +2,9 @@
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark" style="height: 110px; position: fixed;
   left: 0px;
   top: 0px; bottom: 110px; z-index: 15; width: 100vw">
-    <a class="navbar-brand" style="cursor: default; color:white; padding: 20px; font-size: 40px; text-transform: uppercase; letter-spacing: 2px; font-weight: 600">Football Academy</a>
+    <a class="navbar-brand"
+       style="cursor: default; color:white; padding: 20px; font-size: 40px; text-transform: uppercase; letter-spacing: 2px; font-weight: 600">Football
+      Academy</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor02"
             aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
@@ -33,11 +35,10 @@
              placeholder="Search trainer..." required>
     </form>
   </nav>
-
-  <!--  ALL LIST-->
-
-
   <div class="content" style=" margin-top: 110px;  ">
+
+    <!--  ALL LIST-->
+
 
     <div class="container bootstrap snippets bootdey">
       <div class="row">
@@ -64,34 +65,34 @@
                   <tr>
 
                     <td>
-<!--                      <img src="{{trainer.imageUrl}}" alt="" width="50" height="50">-->
-                      <a class="user-link">{{trainer.name}} {{trainer.surname}}</a>
+                      <!--                      <img src="{{trainer.imageUrl}}" alt="" width="50" height="50">-->
+                      <a class="user-link">{{trainer?.surname}} {{trainer?.name}}</a>
                       <br>
-                      <span class="user-subhead">{{trainer.role}}</span>
+                      <span class="user-subhead">{{trainer?.role}}</span>
                     </td>
 
-                    <td>{{trainer.joined}}</td>
-                    <td class="text-center">{{trainer.status}}</td>
+                    <td>{{trainer?.joined}}</td>
+                    <td class="text-center">{{trainer?.status}}</td>
 
                     <td>
-                      <a href="#">{{trainer.login}}</a>
+                      <a href="#">{{trainer?.login}}</a>
                     </td>
 
                     <td class="text-center" data-toggle="modal" style="width: 20%;">
-                      <a (click)="onOpenModal(setInfoTrainer, 'infoTrainer')" class="table-link text-warning">
+                      <a (click)="onOpenModal(trainer, 'infoTrainer')" class="table-link text-warning">
                                             <span class="fa-stack">
                                                 <i class="fa fa-square fa-stack-2x"></i>
                                                 <i class="fa fa-search-plus fa-stack-1x fa-inverse"></i>
                                             </span>
                       </a>
-                      <a (click)="onOpenModal(toEditTrainer, 'updateTrainer')" data-toggle="modal"
+                      <a (click)="onOpenModal(trainer, 'updateTrainer')" data-toggle="modal"
                          class="table-link text-info">
                                             <span class="fa-stack">
                                                 <i class="fa fa-square fa-stack-2x"></i>
                                                 <i class="fa fa-pencil fa-stack-1x fa-inverse"></i>
                                             </span>
                       </a>
-                      <a (click)="onOpenModal(toDeleteTrainer, 'deleteTrainer')" data-toggle="modal"
+                      <a (click)="onOpenModal(trainer, 'deleteTrainer')" data-toggle="modal"
                          class="table-link danger">
                                             <span class="fa-stack">
                                                 <i class="fa fa-square fa-stack-2x"></i>
@@ -119,123 +120,336 @@
       </div>
     </div>
 
-    <!--ADD-->
-    <div id="addTrainerModal" class="modal fade">
-      <div class="modal-dialog">
+
+    <!-- Add   -->
+
+    <div class="modal fade" id="addTrainerModal" tabindex="-1" role="dialog"
+         aria-labelledby="addTrainerModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
         <div class="modal-content">
-          <form #trainerForm="ngForm" (ngSubmit)="addTrainer(trainerForm)">
-            <div class="modal-header">
-              <h4 class="modal-title">Add Trainer</h4>
-              <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-            </div>
-            <div class="modal-body">
+          <div class="modal-header">
+            <h5 class="modal-title" id="addTrainerModalLabel">Add trainer</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <form #addFormTrainer="ngForm" (ngSubmit)="addTrainer(addFormTrainer)">
+
               <div class="form-group">
-                <label>Name</label>
-                <input type="text" ngModel name="name" class="form-control" required>
+                <!--              <label for="parentName">Name :</label>-->
+                <input type="text" ngModel maxlength="20" minlength="2" name="name" class="form-control" id="parentName"
+                       placeholder="Name" required>
               </div>
               <div class="form-group">
-                <label>Surname</label>
-                <input type="text" ngModel name="surname" class="form-control" required>
+                <!--              <label for="parentSurname">Surname :</label>-->
+                <input type="text" ngModel maxlength="20" minlength="2" name="surname" class="form-control"
+                       id="parentSurname"
+                       placeholder="Surname" required>
               </div>
               <div class="form-group">
-                <label>Login (e-mail)</label>
-                <input type="email" ngModel name="login" class="form-control" required>
+                <!--              <label for="parentLogin">Login (e-mail) :</label>-->
+                <input type="email" ngModel maxlength="20" minlength="2" name="login" class="form-control"
+                       id="parentLogin"
+                       placeholder="E-mail" required>
               </div>
               <div class="form-group">
-                <label>Password</label>
-                <input type="password" ngModel name="password" class="form-control" required>
+                <!--              <label for="parentPassword">Password :</label>-->
+                <input type="password" ngModel maxlength="20" minlength="2" name="password" class="form-control"
+                       id="parentPassword"
+                       placeholder="Password" required>
               </div>
               <div class="form-group">
-                <label>Image Url</label>
-                <input type="url" ngModel name="imageUrl" class="form-control" required>
+                <!--              <label for="parentImageUrl">image Url :</label>-->
+                <input type="text" ngModel name="imageUrl" class="form-control"
+                       id="parentImageUrl"
+                       placeholder="imageUrl" required>
               </div>
               <div class="form-group">
-                <label>Joined</label>
-                <input type="date" ngModel name="startWork" class="form-control" required>
+                <!--              <label for="parentJoined">Joined :</label>-->
+                <input type="date" ngModel name="joined" class="form-control" id="parentJoined"
+                       placeholder="Joined" required>
               </div>
               <div class="form-group">
-                <input type="hidden" ngModel="NO" name="status" required>
+                <input type="hidden" ngModel="NO" name="status" class="form-control" id="parentStatus">
               </div>
               <div class="form-group">
-                <input type="hidden" ngModel="TRAINER" name="role" required>
+                <input type="hidden" ngModel="TRAINER" name="role" class="form-control">
               </div>
 
-            </div>
-            <div class="modal-footer">
-              <button type="button" id="add-trainer-form" class="btn btn-secondary" data-dismiss="modal">Close
-              </button>
-              <button [disabled]="trainerForm.invalid" type="submit" class="btn btn-primary">Save</button>
-            </div>
-          </form>
-        </div>
-      </div>
-    </div>
+              <div class="form-group"  >
+                <select name="teamName" ngModel  class="form-control" placeholder="Parent">
+                  <option value="empty">Empty</option>
+                  <option  *ngFor="let team of teams" [value]="team.name">
+                    {{team.name}}
+                  </option>
 
-    <!--EDIT -->
-
-    <div id="editTrainerModal" class="modal fade">
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <form #trainerEditForm="ngForm">
-            <div class="modal-header">
-              <h4 class="modal-title">Edit Trainer</h4>
-              <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-            </div>
-            <div class="modal-body">
-              <input type="hidden" ngModel="{{toEditTrainer?.id}}" name="id" class="form-control">
-              <div class="form-group">
-                <label>Name</label>
-                <input type="text" ngModel="{{toEditTrainer?.name}}" name="name" class="form-control">
-              </div>
-              <div class="form-group">
-                <label>Surname</label>
-                <input type="text" ngModel="{{toEditTrainer?.surname}}" name="surname" class="form-control">
-              </div>
-              <div class="form-group">
-                <label>Login (e-mail)</label>
-                <input type="email" ngModel="{{toEditTrainer?.login}}" name="login" class="form-control">
-              </div>
-              <div class="form-group">
-                <label>Password</label>
-                <input type="password" ngModel="{{toEditTrainer?.password}}" name="password" class="form-control">
-              </div>
-              <div class="form-group">
-                <label>Image Url</label>
-                <input type="url" ngModel="{{toEditTrainer?.imageUrl}}" name="imageUrl" class="form-control">
-              </div>
-              <div class="form-group">
-                <label>Joined</label>
-                <input type="date" ngModel="{{toEditTrainer?.joined}}" name="startWork" class="form-control">
-              </div>
-              <div class="form-group">
-                <select name="status" ngModel="{{toEditTrainer?.status}}" class="form-control">
-                  <option value="YES">YES</option>
-                  <option value="NO">NO</option>
                 </select>
               </div>
-              <div class="form-group">
-                <input type="hidden" ngModel="TRAINER" name="role" required>
+
+
+              <div class="modal-footer">
+                <button type="button" id="add-trainer-form" class="btn btn-secondary" data-dismiss="modal">Close
+                </button>
+                <button [disabled]="addFormTrainer.invalid" type="submit" class="btn btn-primary">Save</button>
               </div>
-            </div>
-            <div class="modal-footer">
-              <button type="button" id="" data-dismiss="modal" class="btn btn-secondary">Close</button>
-              <button (click)="updateTrainer(trainerEditForm.value)" data-dismiss="modal" class="btn btn-primary">Save
-                changes
-              </button>
-            </div>
-          </form>
+            </form>
+          </div>
         </div>
       </div>
     </div>
 
-    <!--      DELETE-->
+    <!--  INFO Trainer-->
 
+
+    <div class="modal fade" id="infoTrainer" tabindex="-1" role="dialog" aria-labelledby="infoTrainerModalLabel"
+         aria-hidden="true">
+      <div class="modal-dialog " style="max-width: 1100px;" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <div class="container bootstrap snippets bootdey">
+              <div class="row">
+                <div class="col-lg-12">
+                  <div class="main-box no-header clearfix">
+                    <div class="main-box-body clearfix">
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                      <form class="form-inline my-2 my-lg-0">
+                        <h2>Info about {{setInfoTrainer?.name}} {{setInfoTrainer?.surname}}</h2>
+                        <button style="margin-left: 250px; margin-bottom: 15px; text-transform: uppercase"
+                                (click)="printReportInfoPdf()" type="button" class="btn btn-success">Download
+                          .pdf
+                        </button>
+                      </form>
+                      <div class="table-responsive">
+
+                        <div class="container bootstrap snippets bootdey">
+                          <div class="panel-body inf-content">
+                            <div class="row">
+                              <div class="col-md-4">
+                                <img alt="" style="width:600px;" title="" class="img-circle img-thumbnail isTooltip"
+                                     src="{{setInfoTrainer?.imageUrl}}" data-original-title="Usuario">
+                                <ul title="Ratings" class="list-inline ratings text-center">
+                                  <li><a href="#"><span class="glyphicon glyphicon-star"></span></a></li>
+                                  <li><a href="#"><span class="glyphicon glyphicon-star"></span></a></li>
+                                  <li><a href="#"><span class="glyphicon glyphicon-star"></span></a></li>
+                                  <li><a href="#"><span class="glyphicon glyphicon-star"></span></a></li>
+                                  <li><a href="#"><span class="glyphicon glyphicon-star"></span></a></li>
+                                </ul>
+                              </div>
+                              <div class="col-md-6">
+                                <strong>Information</strong><br>
+                                <div class="table-responsive">
+                                  <table class="table table-user-information">
+                                    <tbody>
+                                    <tr>
+                                      <td>
+                                        <strong>
+                                          <span class="glyphicon glyphicon-asterisk text-primary"></span>
+                                          Identificacion
+                                        </strong>
+                                      </td>
+                                      <td class="text-primary">
+                                        {{setInfoTrainer?.id}}
+                                      </td>
+                                    </tr>
+                                    <tr>
+                                      <td>
+                                        <strong>
+                                          <span class="glyphicon glyphicon-user  text-primary"></span>
+                                          Name
+                                        </strong>
+                                      </td>
+                                      <td class="text-primary">
+                                        {{setInfoTrainer?.name}}
+                                      </td>
+                                    </tr>
+                                    <tr>
+                                      <td>
+                                        <strong>
+                                          <span class="glyphicon glyphicon-cloud text-primary"></span>
+                                          Lastname
+                                        </strong>
+                                      </td>
+                                      <td class="text-primary">
+                                        {{setInfoTrainer?.surname}}
+                                      </td>
+                                    </tr>
+
+                                    <tr>
+                                      <td>
+                                        <strong>
+                                          <span class="glyphicon glyphicon-bookmark text-primary"></span>
+                                          Username
+                                        </strong>
+                                      </td>
+                                      <td class="text-primary">
+                                        {{setInfoTrainer?.login}}
+                                      </td>
+                                    </tr>
+
+
+                                    <tr>
+                                      <td>
+                                        <strong>
+                                          <span class="glyphicon glyphicon-eye-open text-primary"></span>
+                                          Role
+                                        </strong>
+                                      </td>
+                                      <td class="text-primary">
+                                        {{setInfoTrainer?.role}}
+                                      </td>
+                                    </tr>
+                                    <tr>
+                                      <td>
+                                        <strong>
+                                          <span class="glyphicon glyphicon-envelope text-primary"></span>
+                                          Email
+                                        </strong>
+                                      </td>
+                                      <td class="text-primary">
+                                        {{setInfoTrainer?.login}}
+                                      </td>
+                                    </tr>
+                                    <tr>
+                                      <td>
+                                        <strong>
+                                          <span class="glyphicon glyphicon-calendar text-primary"></span>
+                                          created
+                                        </strong>
+                                      </td>
+                                      <td class="text-primary">
+                                        {{setInfoTrainer?.joined}}
+                                      </td>
+                                    </tr>
+                                    <tr>
+                                      <td>
+                                        <strong>
+                                          <span class="glyphicon glyphicon-calendar text-primary"></span>
+                                          Modified
+                                        </strong>
+                                      </td>
+                                      <td class="text-primary">
+                                        {{setInfoTrainer?.joined}}
+                                      </td>
+                                    </tr>
+                                    </tbody>
+                                  </table>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Edit Modal -->
+
+    <div class="modal fade" id="editTrainerModal" tabindex="-1" role="dialog"
+         aria-labelledby="updateParentModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="updateParentModalLabel">Edit
+              trainer: {{toEditTrainer?.login}}</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <form #editFormTrainer="ngForm">
+              <div class="form-group">
+
+                <input type="hidden" ngModel="{{toEditTrainer?.id}}" name="id" class="form-control"
+                       id="reservationIdReservationEdit" placeholder="">
+                <input type="hidden" ngModel="{{toEditTrainer?.role}}" name="role"
+                       class="form-control" id="reservationIdentifierReservationEdit" placeholder="">
+
+                <div class="form-group">
+                  <!--                <label for="guardianNameEdit">Name:</label>-->
+                  <input type="text" ngModel="{{toEditTrainer?.name}}" name="name"
+                         class="form-control" id="guardianNameEdit" placeholder="">
+                </div>
+
+                <div class="form-group">
+                  <!--                <label for="guardianSurnameEdit">Surname:</label>-->
+                  <input type="text" ngModel="{{toEditTrainer?.surname}}" name="surname"
+                         class="form-control" id="guardianSurnameEdit" placeholder="">
+                </div>
+
+                <div class="form-group">
+                  <!--                <label for="guardianLoginEdit">Login(email):</label>-->
+                  <input type="text" ngModel="{{toEditTrainer?.login}}" name="login"
+                         class="form-control" id="guardianLoginEdit" placeholder="" readonly>
+                </div>
+
+                <div class="form-group">
+                  <!--                <label for="guardianPasswordEdit">Password:</label>-->
+                  <input type="password" ngModel="{{toEditTrainer?.password}}" name="password"
+                         class="form-control" id="guardianPasswordEdit" placeholder="">
+                </div>
+
+                <div class="form-group">
+                  <!--                <label for="guardianSurnameEdit">Surname:</label>-->
+                  <input type="text" ngModel="{{toEditTrainer?.imageUrl}}" name="imageUrl"
+                         class="form-control" id="imageUrlParentEdit" placeholder="">
+                </div>
+
+                <div class="form-group">
+                  <!--                <label for="guardianLoginEdit">Login(email):</label>-->
+                  <input type="email" ngModel="{{toEditTrainer?.joined}}" name="joined"
+                         class="form-control" id="joinedParentEdit" placeholder="">
+                </div>
+
+                <div class="form-group"  >
+                  <select name="teamName" ngModel  class="form-control" placeholder="Parent">
+                    <option value="empty">Empty</option>
+                    <option  *ngFor="let team of teams" [value]="team.name">
+                      {{team.name}}
+                    </option>
+
+                  </select>
+                </div>
+
+                <div class="form-group">
+                  <select name="status" ngModel="{{toEditTrainer?.status}}" class="form-control">
+                    <option value="YES">YES</option>
+                    <option value="NO">NO</option>
+                  </select>
+                </div>
+
+
+                <div class="modal-footer">
+                  <button type="button" id="" data-dismiss="modal" class="btn btn-secondary">Close</button>
+                  <button (click)="deleteTrainerModal(editFormTrainer.value)" data-dismiss="modal" class="btn btn-primary">Save
+                    changes
+                  </button>
+                </div>
+              </div>
+
+
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- Delete Modal -->
     <div class="modal fade" id="deleteTrainerModal" tabindex="-1" role="dialog" aria-labelledby="deleteModelLabel"
          aria-hidden="true">
       <div class="modal-dialog" role="document">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title" id="deleteModelLabel">Delete Team</h5>
+            <h5 class="modal-title" id="deleteModelLabel">Delete trainer</h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>
@@ -254,6 +468,314 @@
     </div>
 
 
+
   </div>
 </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--<div class="allApp" id="main-container">-->
+<!--  <nav class="navbar navbar-expand-lg navbar-dark bg-dark" style="height: 110px; position: fixed;-->
+<!--  left: 0px;-->
+<!--  top: 0px; bottom: 110px; z-index: 15; width: 100vw">-->
+<!--    <a class="navbar-brand" style="cursor: default; color:white; padding: 20px; font-size: 40px; text-transform: uppercase; letter-spacing: 2px; font-weight: 600">Football Academy</a>-->
+<!--    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor02"-->
+<!--            aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">-->
+<!--      <span class="navbar-toggler-icon"></span>-->
+<!--    </button>-->
+
+
+<!--    <div class="collapse navbar-collapse" id="navbarColor02">-->
+<!--      <ul class="navbar-nav mr-auto">-->
+<!--        <li class="nav-item active">-->
+<!--          <button (click)="onOpenModal(null, 'addTrainer')" class="btn btn-success" data-toggle="modal"-->
+<!--                  style="margin:0 100px ">-->
+<!--            <span>Add Trainer</span>-->
+<!--          </button>-->
+<!--        </li>-->
+
+
+<!--        <li class="nav-item active">-->
+<!--          <a style="margin-left: 20px" class="btn btn-success" href="/main">Back-->
+<!--            <span class="sr-only">(current)</span></a>-->
+<!--        </li>-->
+
+<!--      </ul>-->
+<!--    </div>-->
+
+<!--    <form class="form-inline my-0 my-lg-0">-->
+<!--      <input type="search" (ngModelChange)="searchTrainers(key.value)" #key="ngModel" ngModel-->
+<!--             name="key" id="searchName" class="form-control mr-sm-2"-->
+<!--             placeholder="Search trainer..." required>-->
+<!--    </form>-->
+<!--  </nav>-->
+
+<!--  &lt;!&ndash;  ALL LIST&ndash;&gt;-->
+
+
+<!--  <div class="content" style=" margin-top: 110px;  ">-->
+
+<!--    <div class="container bootstrap snippets bootdey">-->
+<!--      <div class="row">-->
+<!--        <div class="col-lg-12">-->
+<!--          <div class="main-box no-header clearfix">-->
+<!--            <div class="main-box-body clearfix">-->
+<!--              <div class="table-responsive">-->
+<!--                <table class="table user-list">-->
+
+<!--                  <thead>-->
+<!--                  <tr>-->
+<!--                    <th><span>Trainer</span></th>-->
+
+<!--                    <th><span>Joined</span></th>-->
+<!--                    <th class="text-center"><span>Status</span>-->
+
+<!--                    </th>-->
+<!--                    <th><span>Email</span></th>-->
+<!--                    <th>-->
+<!--                    </th>-->
+<!--                  </tr>-->
+<!--                  </thead>-->
+<!--                  <tbody *ngFor="let trainer of trainers">-->
+<!--                  <tr>-->
+
+<!--                    <td>-->
+<!--&lt;!&ndash;                      <img src="{{trainer.imageUrl}}" alt="" width="50" height="50">&ndash;&gt;-->
+<!--                      <a class="user-link">{{trainer.name}} {{trainer.surname}}</a>-->
+<!--                      <br>-->
+<!--                      <span class="user-subhead">{{trainer.role}}</span>-->
+<!--                    </td>-->
+
+<!--                    <td>{{trainer.joined}}</td>-->
+<!--                    <td class="text-center">{{trainer.status}}</td>-->
+
+<!--                    <td>-->
+<!--                      <a href="#">{{trainer.login}}</a>-->
+<!--                    </td>-->
+
+<!--                    <td class="text-center" data-toggle="modal" style="width: 20%;">-->
+<!--                      <a (click)="onOpenModal(setInfoTrainer, 'infoTrainer')" class="table-link text-warning">-->
+<!--                                            <span class="fa-stack">-->
+<!--                                                <i class="fa fa-square fa-stack-2x"></i>-->
+<!--                                                <i class="fa fa-search-plus fa-stack-1x fa-inverse"></i>-->
+<!--                                            </span>-->
+<!--                      </a>-->
+<!--                      <a (click)="onOpenModal(toEditTrainer, 'updateTrainer')" data-toggle="modal"-->
+<!--                         class="table-link text-info">-->
+<!--                                            <span class="fa-stack">-->
+<!--                                                <i class="fa fa-square fa-stack-2x"></i>-->
+<!--                                                <i class="fa fa-pencil fa-stack-1x fa-inverse"></i>-->
+<!--                                            </span>-->
+<!--                      </a>-->
+<!--                      <a (click)="onOpenModal(toDeleteTrainer, 'deleteTrainer')" data-toggle="modal"-->
+<!--                         class="table-link danger">-->
+<!--                                            <span class="fa-stack">-->
+<!--                                                <i class="fa fa-square fa-stack-2x"></i>-->
+<!--                                                <i class="fa fa-trash-o fa-stack-1x fa-inverse"></i>-->
+<!--                                            </span>-->
+<!--                      </a>-->
+<!--                    </td>-->
+<!--                  </tr>-->
+
+
+<!--                  </tbody>-->
+
+<!--                </table>-->
+<!--                <div *ngIf="trainers?.length == 0" class="col-lg-12 col-md-12 col-xl-12">-->
+<!--                  <div class="alert alert-info" role="alert">-->
+<!--                    <h4 class="alert-heading">EMPTY LIST OF TRAINERS !</h4>-->
+<!--                    <p>No trainers were found.</p>-->
+<!--                  </div>-->
+<!--                </div>-->
+
+<!--              </div>-->
+<!--            </div>-->
+<!--          </div>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--    </div>-->
+
+<!--    &lt;!&ndash;ADD&ndash;&gt;-->
+<!--    <div id="addTrainerModal" class="modal fade">-->
+<!--      <div class="modal-dialog">-->
+<!--        <div class="modal-content">-->
+<!--          <form #trainerForm="ngForm" (ngSubmit)="addTrainer(trainerForm)">-->
+<!--            <div class="modal-header">-->
+<!--              <h4 class="modal-title">Add Trainer</h4>-->
+<!--              <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>-->
+<!--            </div>-->
+<!--            <div class="modal-body">-->
+<!--              <div class="form-group">-->
+<!--                <label>Name</label>-->
+<!--                <input type="text" ngModel name="name" class="form-control" required>-->
+<!--              </div>-->
+<!--              <div class="form-group">-->
+<!--                <label>Surname</label>-->
+<!--                <input type="text" ngModel name="surname" class="form-control" required>-->
+<!--              </div>-->
+<!--              <div class="form-group">-->
+<!--                <label>Login (e-mail)</label>-->
+<!--                <input type="email" ngModel name="login" class="form-control" required>-->
+<!--              </div>-->
+<!--              <div class="form-group">-->
+<!--                <label>Password</label>-->
+<!--                <input type="password" ngModel name="password" class="form-control" required>-->
+<!--              </div>-->
+<!--              <div class="form-group">-->
+<!--                <label>Image Url</label>-->
+<!--                <input type="url" ngModel name="imageUrl" class="form-control" required>-->
+<!--              </div>-->
+<!--              <div class="form-group">-->
+<!--                <label>Joined</label>-->
+<!--                <input type="date" ngModel name="startWork" class="form-control" required>-->
+<!--              </div>-->
+<!--              <div class="form-group">-->
+<!--                <input type="hidden" ngModel="NO" name="status" required>-->
+<!--              </div>-->
+<!--              <div class="form-group">-->
+<!--                <input type="hidden" ngModel="TRAINER" name="role" required>-->
+<!--              </div>-->
+
+<!--            </div>-->
+<!--            <div class="modal-footer">-->
+<!--              <button type="button" id="add-trainer-form" class="btn btn-secondary" data-dismiss="modal">Close-->
+<!--              </button>-->
+<!--              <button [disabled]="trainerForm.invalid" type="submit" class="btn btn-primary">Save</button>-->
+<!--            </div>-->
+<!--          </form>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--    </div>-->
+
+<!--    &lt;!&ndash;EDIT &ndash;&gt;-->
+
+<!--    <div id="editTrainerModal" class="modal fade">-->
+<!--      <div class="modal-dialog">-->
+<!--        <div class="modal-content">-->
+<!--          <form #trainerEditForm="ngForm">-->
+<!--            <div class="modal-header">-->
+<!--              <h4 class="modal-title">Edit Trainer</h4>-->
+<!--              <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>-->
+<!--            </div>-->
+<!--            <div class="modal-body">-->
+<!--              <input type="hidden" ngModel="{{toEditTrainer?.id}}" name="id" class="form-control">-->
+<!--              <div class="form-group">-->
+<!--                <label>Name</label>-->
+<!--                <input type="text" ngModel="{{toEditTrainer?.name}}" name="name" class="form-control">-->
+<!--              </div>-->
+<!--              <div class="form-group">-->
+<!--                <label>Surname</label>-->
+<!--                <input type="text" ngModel="{{toEditTrainer?.surname}}" name="surname" class="form-control">-->
+<!--              </div>-->
+<!--              <div class="form-group">-->
+<!--                <label>Login (e-mail)</label>-->
+<!--                <input type="email" ngModel="{{toEditTrainer?.login}}" name="login" class="form-control">-->
+<!--              </div>-->
+<!--              <div class="form-group">-->
+<!--                <label>Password</label>-->
+<!--                <input type="password" ngModel="{{toEditTrainer?.password}}" name="password" class="form-control">-->
+<!--              </div>-->
+<!--              <div class="form-group">-->
+<!--                <label>Image Url</label>-->
+<!--                <input type="url" ngModel="{{toEditTrainer?.imageUrl}}" name="imageUrl" class="form-control">-->
+<!--              </div>-->
+<!--              <div class="form-group">-->
+<!--                <label>Joined</label>-->
+<!--                <input type="date" ngModel="{{toEditTrainer?.joined}}" name="startWork" class="form-control">-->
+<!--              </div>-->
+<!--              <div class="form-group">-->
+<!--                <select name="status" ngModel="{{toEditTrainer?.status}}" class="form-control">-->
+<!--                  <option value="YES">YES</option>-->
+<!--                  <option value="NO">NO</option>-->
+<!--                </select>-->
+<!--              </div>-->
+<!--              <div class="form-group">-->
+<!--                <input type="hidden" ngModel="TRAINER" name="role" required>-->
+<!--              </div>-->
+<!--            </div>-->
+<!--            <div class="modal-footer">-->
+<!--              <button type="button" id="" data-dismiss="modal" class="btn btn-secondary">Close</button>-->
+<!--              <button (click)="updateTrainer(trainerEditForm.value)" data-dismiss="modal" class="btn btn-primary">Save-->
+<!--                changes-->
+<!--              </button>-->
+<!--            </div>-->
+<!--          </form>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--    </div>-->
+
+<!--    &lt;!&ndash;      DELETE&ndash;&gt;-->
+
+<!--    <div class="modal fade" id="deleteTrainerModal" tabindex="-1" role="dialog" aria-labelledby="deleteModelLabel"-->
+<!--         aria-hidden="true">-->
+<!--      <div class="modal-dialog" role="document">-->
+<!--        <div class="modal-content">-->
+<!--          <div class="modal-header">-->
+<!--            <h5 class="modal-title" id="deleteModelLabel">Delete Team</h5>-->
+<!--            <button type="button" class="close" data-dismiss="modal" aria-label="Close">-->
+<!--              <span aria-hidden="true">&times;</span>-->
+<!--            </button>-->
+<!--          </div>-->
+<!--          <div class="modal-body">-->
+<!--            <p>Do you want to delete trainer: {{toDeleteTrainer?.login}} ?</p>-->
+<!--            <div class="modal-footer">-->
+<!--              <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>-->
+<!--              <button (click)="deleteTrainer(toDeleteTrainer?.id)" class="btn btn-danger"-->
+<!--                      data-dismiss="modal">Yes-->
+<!--              </button>-->
+<!--            </div>-->
+<!--          </div>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--    </div>-->
+
+
+<!--  </div>-->
+<!--</div>-->
 

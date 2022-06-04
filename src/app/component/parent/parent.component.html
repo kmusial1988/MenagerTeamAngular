@@ -301,8 +301,19 @@
                 <input type="hidden" ngModel="NO" name="status" class="form-control" >
               </div>
               <div class="form-group">
-                <input type="hidden" ngModel="PARENT" maxlength="20" minlength="2" name="role" class="form-control">
+                <input type="hidden" ngModel="PLAYER" maxlength="20" minlength="2" name="role" class="form-control">
               </div>
+
+              <div class="form-group"  >
+                <select name="teamName" ngModel  class="form-control">
+                  <option value="empty">Empty</option>
+                  <option  *ngFor="let team of teams" [value]="team.name">
+                    {{team.name}}
+                  </option>
+
+                </select>
+              </div>
+
 
 
               <div class="modal-footer">
@@ -598,7 +609,7 @@
                 </div>
 
                 <div class="form-group">
-                  <select name="status" ngModel class="form-control">
+                  <select name="status" ngModel="{{editParent?.status}}" class="form-control">
                     <option value="YES">YES</option>
                     <option value="NO">NO</option>
                   </select>
@@ -706,9 +717,18 @@
                 </div>
 
                 <div class="form-group">
-                  <select name="status" ngModel class="form-control">
+                  <select name="status" ngModel="{{editPlayer?.status}}" class="form-control">
                     <option value="YES">YES</option>
                     <option value="NO">NO</option>
+                  </select>
+                </div>
+                <div class="form-group"  >
+                  <select name="teamName" ngModel  class="form-control">
+                    <option value="default">{{editPlayer?.teamName}}</option>
+                    <option  *ngFor="let team of teams" [value]="team.name">
+                      {{team.name}}
+                    </option>
+
                   </select>
                 </div>
 

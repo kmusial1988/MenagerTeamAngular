@@ -3,6 +3,8 @@ import {TrainerService} from "../../service/trainer.service";
 import {Trainer} from "../../model/trainer";
 import {HttpErrorResponse} from "@angular/common/http";
 import {NgForm} from "@angular/forms";
+import {Team} from "../../model/team";
+import {TeamService} from "../../service/team.service";
 
 @Component({
   selector: 'app-trainer',
@@ -16,10 +18,14 @@ export class TrainerComponent implements OnInit {
   public toDeleteTrainer: Trainer;
   public setInfoTrainer: Trainer;
 
-  constructor(private trainerService: TrainerService) { }
+  public teams: Team[];
+
+  constructor(private trainerService: TrainerService,
+              private teamService: TeamService) { }
 
   ngOnInit(): void {
-    this.getTrainers()
+    this.getTrainers();
+    this.getTeams();
   }
 
 
@@ -35,6 +41,17 @@ export class TrainerComponent implements OnInit {
     );
   }
 
+  public getTeams(): void {
+    this.teamService.getTeam().subscribe(
+      (response: Team[]) => {
+        this.teams = response;
+        console.log(this.teams);
+      },
+      (error: HttpErrorResponse) => {
+        alert(error.error.message);
+      }
+    );
+  }
 
   public addTrainer(addFormTrainer: NgForm): void {
     document.getElementById('add-trainer-form').click();
@@ -51,7 +68,7 @@ export class TrainerComponent implements OnInit {
     );
   }
 
-  public updateTrainer(trainer: Trainer): void {
+  public deleteTrainerModal(trainer: Trainer): void {
     this.trainerService.updateTrainer(trainer).subscribe(
       (response: Trainer) => {
         console.log(response);
@@ -122,6 +139,10 @@ export class TrainerComponent implements OnInit {
 
     container.appendChild(button);
     button.click();
+  }
+
+  public printReportInfoPdf(): void{
+    window.print();
   }
 
 }

@@ -5,6 +5,8 @@ import {HttpErrorResponse} from "@angular/common/http";
 import {NgForm} from "@angular/forms";
 import {Player} from "../../model/player";
 import {PlayerService} from "../../service/player.service";
+import {TeamService} from "../../service/team.service";
+import {Team} from "../../model/team";
 
 @Component({
   selector: 'app-parent',
@@ -25,17 +27,32 @@ export class ParentComponent implements OnInit {
   public toDeletePlayer: Player;
   public setInfoPlayer: Player;
 
+  public teams: Team[];
+
   constructor(
     private parentService: ParentService,
-    private playerService: PlayerService
+    private playerService: PlayerService,
+    private teamService: TeamService
   )  { }
 
 
   ngOnInit() {
     this.getParents();
     this.getPlayers();
+    this.getTeams();
   }
 
+  public getTeams(): void {
+    this.teamService.getTeam().subscribe(
+      (response: Team[]) => {
+        this.teams = response;
+        console.log(this.teams);
+      },
+      (error: HttpErrorResponse) => {
+        alert(error.error.message);
+      }
+    );
+  }
 
   public getParents(): void{
     this.parentService.getParent().subscribe(

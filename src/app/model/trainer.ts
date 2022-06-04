@@ -12,6 +12,7 @@ export interface  Trainer{
   joined: string;
   status: Status;
   role: Role;
+  teamName: string;
 
 
 }

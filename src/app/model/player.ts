@@ -13,6 +13,7 @@ export interface  Player{
   status: Status;
   role: Role;
   parentLogin: string;
+  teamName: string;
 
 
 }
